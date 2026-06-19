@@ -1,0 +1,1341 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Plan Camila</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<style>
+:root{
+  --w9:#120408; --w8:#2E0A15; --w7:#5C1223; --w6:#7B2035; --w5:#9B3050;
+  --w4:#C4607E; --w3:#D4809A; --w2:#E8B0C0; --w1:#F7E5EB;
+  --blush:#F2D5DC; --blush-l:#FAF0F3;
+  --cream:#FBF8F6; --white:#FFFFFF;
+  --g8:#2A1A18; --g7:#4A3A38; --g6:#6A5A58; --g5:#8A7A78;
+  --g4:#AAA0A0; --g3:#C8B8B4; --g2:#E0D4D0; --g1:#F5EFED;
+  --gold:#B8863A;
+  --green:#22c55e;
+  --border:rgba(92,18,35,.11); --border2:rgba(92,18,35,.22);
+  --radius:14px;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{background:var(--cream);color:var(--g7);font-family:'DM Sans',sans-serif;font-weight:400;min-height:100vh}
+
+/* ── HEADER ── */
+header{
+  background:var(--w9);height:68px;
+  display:flex;align-items:center;justify-content:space-between;padding:0 56px;
+  position:sticky;top:0;z-index:200;
+  border-bottom:1px solid rgba(255,255,255,.05);
+}
+.logo-name{font-family:'Cormorant Garamond',serif;font-size:21px;font-weight:300;
+  color:var(--white);letter-spacing:3px;text-transform:uppercase;line-height:1}
+.logo-name em{font-style:italic;color:var(--w3)}
+.logo-sub{font-size:9px;letter-spacing:2.5px;text-transform:uppercase;color:rgba(255,255,255,.25);margin-top:3px}
+nav{display:flex;gap:2px;background:rgba(255,255,255,.06);padding:4px;border-radius:30px;border:1px solid rgba(255,255,255,.08)}
+nav a{padding:7px 22px;border-radius:24px;font-size:10.5px;font-weight:600;letter-spacing:1.5px;
+  text-transform:uppercase;text-decoration:none;color:rgba(255,255,255,.4);transition:all .2s;cursor:pointer}
+nav a.active,nav a:hover{background:var(--w7);color:var(--w1)}
+
+/* ── MAIN ── */
+main{max-width:1360px;margin:0 auto;padding:0 56px 80px}
+.page{display:none;padding-top:36px}.page.active{display:block}
+
+/* ── PAGE HERO ── */
+.page-hero{
+  background:var(--w8);border-radius:20px;padding:44px 52px;margin-bottom:28px;
+  position:relative;overflow:hidden;
+}
+.page-hero::before{content:'';position:absolute;right:-50px;top:-50px;width:280px;height:280px;
+  border-radius:50%;background:rgba(92,18,35,.5);pointer-events:none}
+.page-hero::after{content:'';position:absolute;right:100px;bottom:-60px;width:160px;height:160px;
+  border-radius:50%;background:rgba(196,96,126,.12);pointer-events:none}
+.ph-eye{font-size:9px;letter-spacing:3px;text-transform:uppercase;color:var(--w3);
+  font-weight:600;margin-bottom:12px;position:relative;z-index:1}
+.page-hero h1{font-family:'Cormorant Garamond',serif;font-size:clamp(42px,4vw,62px);
+  font-weight:300;line-height:.95;color:var(--white);margin-bottom:12px;
+  text-transform:uppercase;letter-spacing:-1px;position:relative;z-index:1}
+.page-hero h1 em{font-style:italic;text-transform:none;color:var(--blush);letter-spacing:0}
+.page-hero p{font-size:13px;color:rgba(255,255,255,.45);max-width:440px;line-height:1.8;
+  position:relative;z-index:1}
+
+/* ── STATS ROW ── */
+.stats-row{
+  display:grid;grid-template-columns:repeat(5,1fr);
+  gap:1px;background:var(--border);border:1px solid var(--border);
+  border-radius:16px;overflow:hidden;margin-bottom:28px;
+}
+.stat-card{background:var(--white);padding:20px 16px;text-align:center}
+.stat-val{font-family:'Cormorant Garamond',serif;font-size:34px;font-weight:300;
+  color:var(--w7);line-height:1;margin-bottom:4px}
+.stat-lbl{font-size:9.5px;color:var(--g5);text-transform:uppercase;letter-spacing:1px;font-weight:500}
+
+/* ── CARDS ── */
+.card{background:var(--white);border:1px solid var(--border);border-radius:var(--radius);padding:24px}
+.two-col{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+.sec-lbl{font-size:9px;letter-spacing:2.5px;text-transform:uppercase;color:var(--g4);
+  font-weight:600;margin-bottom:14px;display:flex;align-items:center;gap:8px}
+.sec-lbl::after{content:'';flex:1;height:1px;background:var(--g2)}
+
+/* ── CYCLE BAR ── */
+.cycle-bar{
+  background:var(--white);border-radius:var(--radius);border:1px solid var(--border);
+  padding:26px 32px;margin-bottom:28px;display:flex;align-items:center;gap:44px;
+}
+.cyc-num .eye{font-size:9px;letter-spacing:3px;text-transform:uppercase;color:var(--g4);font-weight:600;margin-bottom:4px}
+.cyc-big{font-family:'Cormorant Garamond',serif;font-size:66px;font-weight:300;color:var(--w7);line-height:1}
+.phase-badge{display:inline-flex;align-items:center;gap:5px;margin-top:8px;font-size:9.5px;
+  font-weight:600;letter-spacing:1.5px;text-transform:uppercase;padding:5px 13px;border-radius:20px}
+.phase-badge.folicular{background:rgba(92,18,35,.07);color:var(--w6);border:1px solid rgba(92,18,35,.14)}
+.phase-badge.lutea{background:rgba(196,96,126,.07);color:var(--w4);border:1px solid rgba(196,96,126,.18)}
+.phase-badge.menstrual{background:rgba(212,128,154,.08);color:var(--w3);border:1px solid rgba(212,128,154,.2)}
+.cyc-slider{flex:1}
+.seg-track{display:flex;gap:2px;margin-bottom:8px}
+.seg{flex:1;height:5px;border-radius:3px;cursor:pointer;opacity:.3;transition:opacity .15s,transform .15s}
+.seg:hover{opacity:.7}.seg.on{opacity:1;transform:scaleY(1.7)}
+.seg.mens{background:var(--w3)}.seg.fol{background:var(--w7)}.seg.ovu{background:var(--w5)}.seg.lut{background:var(--w4)}
+.range-in{width:100%;-webkit-appearance:none;height:3px;background:var(--g1);border-radius:3px;outline:none;cursor:pointer;margin-top:8px}
+.range-in::-webkit-slider-thumb{-webkit-appearance:none;width:18px;height:18px;border-radius:50%;
+  background:var(--w7);cursor:pointer;border:2px solid white;box-shadow:0 2px 10px rgba(92,18,35,.3)}
+.seg-labels{display:flex;justify-content:space-between;font-size:9px;color:var(--g3);letter-spacing:.3px;margin-top:5px}
+
+/* ── DAY GRID ── */
+.week-lbl{font-family:'Cormorant Garamond',serif;font-size:15px;font-weight:300;
+  color:var(--g6);margin-bottom:12px;letter-spacing:.5px;font-style:italic}
+.day-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:8px;margin-bottom:22px}
+.dc{
+  border-radius:12px;padding:18px 14px 14px;cursor:pointer;
+  transition:all .2s;border:1px solid transparent;
+  min-height:136px;display:flex;flex-direction:column;gap:7px;
+  position:relative;overflow:hidden;
+}
+.dc::after{content:'';position:absolute;top:0;left:0;right:0;height:3px}
+.dc:hover{transform:translateY(-3px);box-shadow:0 10px 24px rgba(92,18,35,.1)}
+.dc.run{background:var(--blush-l);border-color:rgba(92,18,35,.09)}
+.dc.run::after{background:linear-gradient(90deg,var(--w7),var(--w4))}
+.dc.gym{background:rgba(196,96,126,.06);border-color:rgba(196,96,126,.12)}
+.dc.gym::after{background:var(--w4)}
+.dc.rest{background:var(--g1);border-color:var(--g2)}
+.dc.rest::after{background:var(--g3)}
+.dc.selected{box-shadow:0 0 0 2px var(--w7),0 10px 24px rgba(92,18,35,.15)!important;border-color:transparent!important}
+.dc-num{font-size:9px;letter-spacing:2px;text-transform:uppercase;font-weight:600}
+.dc.run .dc-num{color:var(--w5)}.dc.gym .dc-num{color:var(--w4)}.dc.rest .dc-num{color:var(--g4)}
+.dc-icon{font-size:22px}
+.dc-label{font-size:11.5px;font-weight:500;color:var(--g7);line-height:1.3}
+.dc.rest .dc-label{color:var(--g5)}
+.dc-time{font-size:9.5px;color:var(--g3);margin-top:auto;font-weight:400}
+
+/* ── DETAIL PANEL ── */
+.detail{
+  background:var(--white);border-radius:16px;border:1px solid var(--border);
+  overflow:hidden;display:none;animation:fadeUp .28s ease;margin-bottom:8px;
+}
+.detail.open{display:block}
+@keyframes fadeUp{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+.dh{padding:28px 34px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--border)}
+.dh.run-h{background:linear-gradient(135deg,var(--w8) 0%,var(--w7) 100%)}
+.dh.gym-h{background:linear-gradient(135deg,var(--blush-l) 0%,var(--white) 100%);border-bottom:1px solid var(--border)}
+.dh.rest-h{background:var(--g1)}
+.dh-eye{font-size:9px;letter-spacing:3px;text-transform:uppercase;font-weight:600;margin-bottom:6px}
+.run-h .dh-eye{color:var(--w3)}.gym-h .dh-eye{color:var(--w5)}.rest-h .dh-eye{color:var(--g4)}
+.dh-title{font-family:'Cormorant Garamond',serif;font-size:28px;font-weight:300;line-height:1.05}
+.run-h .dh-title{color:var(--white)}.gym-h .dh-title{color:var(--w7)}.rest-h .dh-title{color:var(--g7)}
+.dh-icon{font-size:44px;opacity:.75}
+.dbody{padding:28px 34px}
+.phase-note{padding:11px 16px;border-radius:9px;font-size:12px;color:var(--g6);
+  margin-bottom:14px;line-height:1.6;background:var(--blush-l);
+  border:1px solid rgba(92,18,35,.08);display:flex;gap:9px;align-items:flex-start}
+.pni{font-size:15px;flex-shrink:0;margin-top:1px}
+
+/* RUNNA SESSION */
+.runna-card{
+  background:linear-gradient(135deg,var(--w8) 0%,var(--w6) 100%);
+  border-radius:12px;padding:26px 30px;margin-bottom:16px;
+  display:flex;align-items:center;justify-content:space-between;gap:24px;
+}
+.runna-card h3{font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:300;
+  color:var(--white);margin-bottom:6px}
+.runna-card p{font-size:12px;color:rgba(255,255,255,.5);line-height:1.7;max-width:380px}
+.runna-icon{font-size:44px;flex-shrink:0}
+
+/* GYM BLOCKS */
+.rblocks{display:flex;flex-direction:column;gap:6px}
+.rb{background:var(--cream);border-radius:10px;padding:14px 18px;
+  display:flex;gap:14px;align-items:flex-start;border:1px solid var(--border);transition:border-color .2s}
+.rb:hover{border-color:var(--border2)}
+.rb-n{font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:300;
+  color:var(--g3);line-height:1;min-width:26px}
+.gym-detail .rb-n{color:var(--w4)}
+.rb-info h4{font-size:12px;font-weight:600;color:var(--g7);margin-bottom:2px}
+.rb-info p{font-size:11px;color:var(--g5);line-height:1.4}
+.rb-badge{margin-left:auto;flex-shrink:0;font-size:10px;font-weight:600;
+  padding:3px 10px;border-radius:16px;white-space:nowrap;align-self:center;
+  background:var(--blush);color:var(--w7);border:1px solid rgba(92,18,35,.12)}
+.gym-detail .rb-badge{background:rgba(196,96,126,.1);color:var(--w4);border-color:rgba(196,96,126,.2)}
+
+/* REST */
+.rest-body{text-align:center;padding:20px 0}
+.rest-em{font-size:52px;margin-bottom:14px}
+.rest-body h3{font-family:'Cormorant Garamond',serif;font-size:24px;font-weight:300;
+  color:var(--g7);margin-bottom:8px;font-style:italic}
+.rest-body p{font-size:13px;color:var(--g5);max-width:300px;margin:0 auto;line-height:1.85}
+
+/* ── STRAVA ── */
+.strava-connect-hero{
+  background:linear-gradient(135deg,var(--w9) 0%,var(--w7) 100%);
+  border-radius:20px;padding:40px 52px;margin-bottom:28px;
+  display:flex;align-items:center;gap:44px;position:relative;overflow:hidden;
+}
+.strava-connect-hero::before{content:'';position:absolute;right:-40px;top:-40px;
+  width:240px;height:240px;border-radius:50%;background:rgba(252,76,2,.12)}
+.strava-connect-hero::after{content:'';position:absolute;right:140px;bottom:-60px;
+  width:160px;height:160px;border-radius:50%;background:rgba(196,96,126,.1)}
+.sch-text{position:relative;z-index:1;flex:1}
+.sch-text h2{font-family:'Cormorant Garamond',serif;font-size:38px;font-weight:300;
+  color:var(--white);line-height:1.05;margin-bottom:10px;text-transform:uppercase;letter-spacing:-0.5px}
+.sch-text h2 em{text-transform:none;font-style:italic;color:var(--blush);letter-spacing:0}
+.sch-text p{font-size:13px;color:rgba(255,255,255,.45);max-width:400px;line-height:1.8;margin-bottom:22px}
+.btn-strava{display:inline-flex;align-items:center;gap:8px;background:#FC4C02;color:white;
+  border:none;padding:12px 26px;border-radius:26px;font-family:'DM Sans',sans-serif;
+  font-size:12px;font-weight:600;cursor:pointer;transition:all .15s;letter-spacing:.5px}
+.btn-strava:hover{transform:translateY(-2px);box-shadow:0 8px 20px rgba(252,76,2,.4)}
+.btn-strava:disabled{background:#555;cursor:default;transform:none;box-shadow:none}
+.strava-status{display:inline-flex;align-items:center;gap:7px;font-size:11px;
+  color:rgba(255,255,255,.35);margin-top:10px}
+.sdot{width:7px;height:7px;border-radius:50%;background:rgba(255,255,255,.2)}
+.sdot.on{background:var(--green);box-shadow:0 0 8px rgba(34,197,94,.5)}
+.sch-img{font-size:80px;flex-shrink:0;position:relative;z-index:1;opacity:.85}
+
+/* In-detail strava */
+.strava-mini{background:var(--cream);border:1px dashed var(--border2);border-radius:12px;
+  padding:22px 26px;text-align:center;margin-top:4px}
+.strava-mini h3{font-family:'Cormorant Garamond',serif;font-size:18px;font-weight:300;
+  color:var(--g7);margin-bottom:6px}
+.strava-mini p{font-size:11.5px;color:var(--g5);line-height:1.7;margin-bottom:16px;max-width:280px;margin-left:auto;margin-right:auto}
+.strava-mini .strava-status{color:var(--g5);margin-top:8px;justify-content:center}
+.strava-mini .sdot{background:var(--g3)}
+
+/* STRAVA ACTIVITIES */
+.acts-section{margin-bottom:28px}
+.act-row{display:flex;align-items:center;gap:12px;padding:10px 14px;
+  background:var(--cream);border-radius:10px;border:1px solid var(--border);
+  font-size:12px;margin-bottom:5px}
+.act-date{color:var(--g5);width:76px;flex-shrink:0;font-size:11px}
+.act-name{color:var(--g7);font-weight:500;flex:1}
+.act-dist{color:var(--w7);font-weight:700;width:58px;text-align:right}
+.act-pace{color:var(--g5);width:68px;text-align:right;font-size:11px}
+.act-badge{background:rgba(252,76,2,.1);color:#FC4C02;font-size:9.5px;font-weight:700;
+  padding:2px 9px;border-radius:99px;flex-shrink:0;letter-spacing:.5px}
+
+/* ── RUNNING PAGE CHARTS ── */
+.chart-card{background:var(--white);border:1px solid var(--border);border-radius:var(--radius);padding:22px}
+
+/* RUNS TABLE */
+.runs-table{width:100%;border-collapse:collapse;font-size:12px}
+.runs-table th{text-align:left;padding:8px 14px;color:var(--g4);font-size:9.5px;
+  text-transform:uppercase;letter-spacing:.8px;font-weight:600;border-bottom:1px solid var(--border)}
+.runs-table td{padding:9px 14px;border-bottom:1px solid rgba(92,18,35,.04);color:var(--g7)}
+.runs-table tr:last-child td{border-bottom:none}
+.runs-table tr:hover td{background:var(--blush-l)}
+.phase-row td{background:var(--blush-l)!important;color:var(--w6);font-size:9.5px;
+  font-weight:700;text-transform:uppercase;letter-spacing:1px;padding:5px 14px}
+.pp{display:inline-flex;padding:2px 9px;border-radius:99px;font-size:10px;font-weight:700}
+.pp-fast{background:rgba(92,18,35,.1);color:var(--w7)}
+.pp-med{background:rgba(196,96,126,.1);color:var(--w4)}
+.pp-slow{background:var(--g1);color:var(--g5)}
+
+/* ── NUTRITION ── */
+.nut-layout{display:grid;grid-template-columns:256px 1fr;gap:24px;align-items:start}
+.nut-side{background:var(--white);border-radius:var(--radius);border:1px solid var(--border);
+  overflow:hidden;position:sticky;top:80px}
+.nut-side-hdr{padding:20px 20px 14px;border-bottom:1px solid var(--border)}
+.ns-ey{font-size:9px;letter-spacing:3px;text-transform:uppercase;color:var(--g4);font-weight:600;margin-bottom:5px}
+.nut-side-hdr h3{font-family:'Cormorant Garamond',serif;font-size:17px;font-weight:300;color:var(--g7)}
+.nut-days{padding:6px;display:flex;flex-direction:column;gap:2px}
+.ndb{width:100%;text-align:left;padding:10px 12px;border:none;background:none;border-radius:9px;
+  cursor:pointer;display:flex;align-items:center;gap:10px;transition:background .15s;font-family:'DM Sans',sans-serif}
+.ndb:hover{background:var(--cream)}.ndb.act{background:var(--blush-l)}
+.ndb-ico{font-size:15px;width:22px;text-align:center}
+.ndb-info{flex:1}
+.ndb-nm{font-size:11.5px;font-weight:500;color:var(--g7)}.ndb.act .ndb-nm{color:var(--w7)}
+.ndb-tp{font-size:9px;color:var(--g4);margin-top:1px;letter-spacing:.5px;text-transform:uppercase}
+.ndb.act .ndb-tp{color:var(--w4)}
+.ndb-kc{font-size:10px;color:var(--g4);font-weight:600}.ndb.act .ndb-kc{color:var(--w6)}
+
+/* MACRO SUMMARY */
+.mac-sum{background:var(--white);border-radius:var(--radius);border:1px solid var(--border);
+  padding:26px 28px;margin-bottom:16px}
+.mac-top{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:18px}
+.mac-top h3{font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:300;color:var(--g7)}
+.mac-top h3 em{font-style:italic;color:var(--w6)}
+.type-badge{font-size:9px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;padding:4px 12px;border-radius:16px}
+.tb-run{background:var(--blush);color:var(--w7);border:1px solid rgba(92,18,35,.14)}
+.tb-gym{background:rgba(196,96,126,.1);color:var(--w4);border:1px solid rgba(196,96,126,.18)}
+.tb-rest{background:var(--g1);color:var(--g5);border:1px solid var(--g2)}
+.mac-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+.mg-lbl{font-size:9px;letter-spacing:2px;text-transform:uppercase;color:var(--g4);font-weight:600;margin-bottom:5px}
+.mg-val{font-family:'Cormorant Garamond',serif;font-size:28px;font-weight:300;color:var(--g7);line-height:1;margin-bottom:5px}
+.mg-val span{font-size:12px;font-family:'DM Sans',sans-serif;color:var(--g3)}
+.mg-bar{height:3px;background:var(--g1);border-radius:2px;overflow:hidden}
+.mg-fill{height:100%;border-radius:2px;transition:width .8s}
+.mg-fill.kcal{background:var(--w7)}.mg-fill.prot{background:var(--green)}
+.mg-fill.carb{background:var(--w4)}.mg-fill.fat{background:var(--gold)}
+.note-b{background:var(--blush-l);border-radius:9px;padding:11px 15px;font-size:11.5px;
+  color:var(--g5);line-height:1.6;margin-bottom:8px;display:flex;gap:9px;align-items:flex-start;
+  border:1px solid rgba(92,18,35,.07)}
+.note-b .ni{font-size:15px;flex-shrink:0}
+
+/* MEALS */
+.meals{display:flex;flex-direction:column;gap:10px}
+.meal-c{background:var(--white);border-radius:14px;border:1px solid var(--border);overflow:hidden;transition:border-color .2s}
+.meal-c:hover{border-color:var(--border2)}
+.meal-hdr{padding:16px 22px;display:flex;align-items:center;gap:12px;cursor:pointer;border-bottom:1px solid transparent;transition:border-color .2s}
+.meal-c.open .meal-hdr{border-bottom-color:var(--border)}
+.mh-ico{font-size:20px;width:30px;text-align:center}
+.mh-info{flex:1}
+.mh-name{font-family:'Cormorant Garamond',serif;font-size:16px;font-weight:300;color:var(--g7)}
+.mh-time{font-size:9px;color:var(--g3);letter-spacing:1.5px;text-transform:uppercase;margin-top:2px}
+.mh-pills{display:flex;gap:5px;margin-top:5px}
+.mp{font-size:9px;padding:2px 7px;border-radius:9px;font-weight:600;letter-spacing:.3px}
+.mp.p{background:rgba(34,197,94,.1);color:#16a34a}.mp.c{background:var(--blush);color:var(--w6)}.mp.f{background:rgba(184,134,58,.1);color:var(--gold)}
+.mh-kcal{font-size:12px;font-weight:600;color:var(--g4)}
+.meal-tog{font-size:11px;color:var(--g3);transition:transform .2s;margin-left:4px}
+.meal-c.open .meal-tog{transform:rotate(180deg)}
+.meal-body{display:none;padding:14px 22px;flex-direction:column;gap:0}
+.meal-c.open .meal-body{display:flex}
+.mi{display:flex;align-items:flex-start;gap:10px;padding:10px 0;border-bottom:1px solid var(--border)}
+.mi:last-child{border-bottom:none;padding-bottom:0}
+.mi-dot{width:7px;height:7px;border-radius:50%;margin-top:5px;flex-shrink:0}
+.mi-dot.prot{background:var(--green)}.mi-dot.carb{background:var(--w4)}
+.mi-dot.fat{background:var(--gold)}.mi-dot.veg{background:#10b981}
+.mi-inf{flex:1}
+.mi-nm{font-size:12px;font-weight:500;color:var(--g7);margin-bottom:1px}
+.mi-dt{font-size:11px;color:var(--g5);line-height:1.4}
+.mi-right{text-align:right;flex-shrink:0}
+.mi-qty{font-size:11px;font-weight:600;color:var(--g5)}
+.mi-mac{font-size:10px;color:var(--g3);margin-top:1px}
+
+/* ── SCROLL ── */
+.scroll-y{max-height:460px;overflow-y:auto}
+.scroll-y::-webkit-scrollbar{width:3px}
+.scroll-y::-webkit-scrollbar-thumb{background:var(--border2);border-radius:3px}
+
+/* ── RESPONSIVE ── */
+@media(max-width:1100px){.nut-layout{grid-template-columns:1fr}.nut-side{position:static}}
+@media(max-width:1024px){
+  header{padding:0 24px}main{padding:0 24px 60px}
+  .day-grid{grid-template-columns:repeat(4,1fr)}
+  .stats-row{grid-template-columns:repeat(3,1fr)}
+  .mac-grid{grid-template-columns:repeat(2,1fr)}
+  .two-col{grid-template-columns:1fr}
+}
+@media(max-width:640px){
+  main{padding:0 16px 60px}
+  .day-grid{grid-template-columns:repeat(2,1fr)}
+  .stats-row{grid-template-columns:repeat(2,1fr)}
+  .strava-connect-hero{flex-direction:column}.sch-img{display:none}
+}
+
+/* ── REFERENCE TABLE ── */
+.ref-wrap{background:var(--white);border:1px solid var(--border);border-radius:var(--radius);padding:26px 32px;margin-bottom:24px}
+.ref-intro{font-size:12px;color:var(--g5);line-height:1.7;margin-bottom:18px;max-width:700px}
+.ref-groups{display:grid;grid-template-columns:repeat(4,1fr);gap:28px}
+@media(max-width:900px){.ref-groups{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:560px){.ref-groups{grid-template-columns:1fr}}
+.ref-group h4{font-size:9px;letter-spacing:2.5px;text-transform:uppercase;font-weight:700;
+  margin-bottom:10px;padding-bottom:7px;border-bottom:2px solid}
+.rg-prot h4{color:var(--green);border-color:var(--green)}
+.rg-carb h4{color:var(--w5);border-color:var(--w4)}
+.rg-fat  h4{color:var(--gold);border-color:var(--gold)}
+.rg-veg  h4{color:#10b981;border-color:#10b981}
+.ref-item{padding:7px 0;border-bottom:1px solid var(--border);display:flex;gap:8px;align-items:flex-start}
+.ref-item:last-child{border-bottom:none}
+.ri-l{flex:1}
+.ri-name{font-size:11.5px;font-weight:600;color:var(--g7)}
+.ri-ex{font-size:10px;color:var(--g4);line-height:1.35;margin-top:1px}
+.ri-r{text-align:right;flex-shrink:0}
+.ri-qty{font-size:12.5px;font-weight:700;color:var(--w6);white-space:nowrap}
+.ri-mac{font-size:9.5px;color:var(--g4);margin-top:1px;white-space:nowrap}
+/* Meal macro blocks */
+.mb{display:flex;align-items:flex-start;gap:10px;padding:10px 0;border-bottom:1px solid var(--border)}
+.mb:last-child{border-bottom:none;padding-bottom:0}
+.mb-dot{width:7px;height:7px;border-radius:50%;margin-top:5px;flex-shrink:0}
+.mb-dot.prot{background:var(--green)}.mb-dot.carb{background:var(--w4)}
+.mb-dot.fat{background:var(--gold)}.mb-dot.veg{background:#10b981}
+.mb-inf{flex:1}
+.mb-nm{font-size:12px;font-weight:600;color:var(--g7);margin-bottom:1px}
+.mb-ex{font-size:11px;color:var(--g5);line-height:1.4}
+.mb-r{text-align:right;flex-shrink:0}
+.mb-qty{font-size:12px;font-weight:700;color:var(--w6)}
+.mb-mac{font-size:10px;color:var(--g3);margin-top:1px}
+</style>
+</head>
+<body>
+
+<header>
+  <div>
+    <div class="logo-name">Plan <em>Camila</em></div>
+    <div class="logo-sub">Entrenamiento · Running · Nutrición</div>
+  </div>
+  <nav>
+    <a class="active" onclick="showPage('training',this)">Entrenamiento</a>
+    <a onclick="showPage('running',this)">Running</a>
+    <a onclick="showPage('nutrition',this)">Nutrición</a>
+  </nav>
+</header>
+
+<main>
+
+<!-- ═══ ENTRENAMIENTO ═══ -->
+<div id="training" class="page active">
+  <div class="page-hero">
+    <div class="ph-eye">Plan 12 semanas · 10K · Runna</div>
+    <h1>Tu semana,<br><em>hoy.</em></h1>
+    <p>Selecciona el día de tu ciclo y el plan de la semana se ajusta automáticamente — rutinas, intensidad y horarios.</p>
+  </div>
+
+  <div class="cycle-bar">
+    <div class="cyc-num">
+      <div class="eye">Día del ciclo</div>
+      <div class="cyc-big" id="t-day-num">7</div>
+      <div class="phase-badge folicular" id="t-phase-badge">🌿 Folicular</div>
+    </div>
+    <div class="cyc-slider">
+      <div class="seg-track" id="t-seg-track"></div>
+      <input type="range" class="range-in" id="t-slider" min="1" max="28" value="7" oninput="setCycleDay(+this.value)">
+      <div class="seg-labels"><span>Día 1</span><span>Menstrual · Folicular · Ovulación · Lútea</span><span>Día 28</span></div>
+    </div>
+  </div>
+
+  <div class="week-lbl" id="t-week-lbl">Tu semana — Fase Folicular</div>
+  <div class="day-grid" id="t-day-grid"></div>
+  <div class="detail" id="t-detail"></div>
+</div>
+
+
+<!-- ═══ RUNNING ═══ -->
+<div id="running" class="page">
+  <div class="page-hero">
+    <div class="ph-eye">Apple Watch · Runna · Strava</div>
+    <h1>Corre.<br><em>Mejora.</em></h1>
+    <p>Tu historial completo de running desde el primer día. Conecta Strava para que cada sesión de Runna aparezca aquí automáticamente.</p>
+  </div>
+
+  <div class="stats-row">
+    <div class="stat-card"><div class="stat-val" id="s-km">219.7</div><div class="stat-lbl">km totales</div></div>
+    <div class="stat-card"><div class="stat-val" id="s-runs">43</div><div class="stat-lbl">salidas</div></div>
+    <div class="stat-card"><div class="stat-val" id="s-hrs">33.1</div><div class="stat-lbl">horas corridas</div></div>
+    <div class="stat-card"><div class="stat-val">14.0</div><div class="stat-lbl">km más larga</div></div>
+    <div class="stat-card"><div class="stat-val">6:58</div><div class="stat-lbl">mejor ritmo /km</div></div>
+  </div>
+
+  <!-- Strava connect -->
+  <div class="strava-connect-hero">
+    <div class="sch-text">
+      <h2>Conecta <em>Strava</em><br>con Runna</h2>
+      <p>Cada entrenamiento que completes en Runna se sincroniza automáticamente a Strava. Vincula tu cuenta y aquí verás tus sesiones en tiempo real.</p>
+      <button class="btn-strava" id="btn-strava-main" onclick="STRAVA.connect()">🔗 Conectar Strava</button>
+      <div class="strava-status"><span class="sdot" id="s-dot"></span><span id="s-status-txt">Sin conectar</span></div>
+    </div>
+    <div class="sch-img">🏃‍♀️</div>
+  </div>
+
+  <!-- Live activities (hidden until connected) -->
+  <div class="acts-section card" id="strava-acts-section" style="display:none;margin-bottom:28px">
+    <div class="sec-lbl">Últimas sesiones Runna · Strava</div>
+    <div id="strava-acts-list"></div>
+  </div>
+
+  <!-- Charts -->
+  <div class="two-col" style="margin-bottom:20px">
+    <div class="chart-card">
+      <div class="sec-lbl">Distancias por salida (km)</div>
+      <canvas id="distChart" height="210"></canvas>
+    </div>
+    <div class="chart-card">
+      <div class="sec-lbl">Evolución del ritmo (min/km)</div>
+      <canvas id="paceChart" height="210"></canvas>
+    </div>
+  </div>
+
+  <div class="chart-card" style="margin-bottom:20px">
+    <div class="sec-lbl">Kilómetros por mes</div>
+    <canvas id="monthChart" height="90"></canvas>
+  </div>
+
+  <!-- All runs -->
+  <div class="card">
+    <div class="sec-lbl">Historial · Apple Health Export</div>
+    <div class="scroll-y">
+      <table class="runs-table">
+        <thead><tr>
+          <th>Fecha</th><th>Distancia</th><th>Duración</th><th>Ritmo</th><th>Fuente</th>
+        </tr></thead>
+        <tbody id="runs-body"></tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+
+<!-- ═══ NUTRICIÓN ═══ -->
+<div id="nutrition" class="page">
+  <div class="page-hero">
+    <div class="ph-eye">Nutrición · Recomposición · Ciclo</div>
+    <h1>Come para<br><em>rendir.</em></h1>
+    <p>Plan calórico y de macros ajustado a tu objetivo de recomposición, el tipo de entreno del día y el momento de tu ciclo.</p>
+  </div>
+  <div id="nut-ref"></div>
+  <div class="nut-layout">
+    <div class="nut-side">
+      <div class="nut-side-hdr">
+        <div class="ns-ey">Semana tipo</div>
+        <h3>Selecciona el día</h3>
+      </div>
+      <div class="nut-days" id="nut-days"></div>
+    </div>
+    <div id="nut-content"></div>
+  </div>
+</div>
+
+</main>
+
+<script>
+// ═══════════════════════════════════════════════════════════════════
+// ⚙️  STRAVA INTEGRATION
+// ───────────────────────────────────────────────────────────────────
+// CÓMO ACTIVAR:
+//   1. Ve a https://www.strava.com/settings/api y crea una app
+//   2. En "Authorization Callback Domain" pon el dominio donde abres este archivo
+//      (p.ej. "localhost" si lo abres localmente con un servidor)
+//   3. Rellena CLIENT_ID y CLIENT_SECRET aquí abajo y guarda el archivo
+// ═══════════════════════════════════════════════════════════════════
+const STRAVA = {
+  CLIENT_ID:     'TU_CLIENT_ID',       // ← Reemplaza con tu Client ID
+  CLIENT_SECRET: 'TU_CLIENT_SECRET',   // ← Reemplaza con tu Client Secret
+
+  REDIRECT_URI: window.location.href.split('?')[0].split('#')[0],
+  SCOPE: 'activity:read_all',
+
+  token: null, athlete: null, activities: [], connected: false,
+
+  connect() {
+    if (this.CLIENT_ID === 'TU_CLIENT_ID') {
+      alert('⚙️ Para activar Strava:\n\n1. Ve a https://www.strava.com/settings/api\n2. Crea una app\n3. Rellena CLIENT_ID y CLIENT_SECRET en el código de esta página\n4. Guarda y recarga el archivo');
+      return;
+    }
+    const url = `https://www.strava.com/oauth/authorize`
+      + `?client_id=${this.CLIENT_ID}`
+      + `&response_type=code`
+      + `&redirect_uri=${encodeURIComponent(this.REDIRECT_URI)}`
+      + `&approval_prompt=force`
+      + `&scope=${this.SCOPE}`;
+    window.location.href = url;
+  },
+
+  async exchangeCode(code) {
+    _stravaUI('loading', 'Conectando con Strava...');
+    try {
+      const res = await fetch('https://www.strava.com/oauth/token', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          client_id: this.CLIENT_ID,
+          client_secret: this.CLIENT_SECRET,
+          code,
+          grant_type: 'authorization_code'
+        })
+      });
+      const data = await res.json();
+      if (data.access_token) {
+        this.token = data.access_token;
+        this.athlete = data.athlete;
+        this.connected = true;
+        await this.fetchActivities();
+        const name = this.athlete ? this.athlete.firstname : '';
+        _stravaUI('ok', name ? `Conectada como ${name} ✓` : 'Strava conectado ✓');
+        renderStravaActivities();
+      } else {
+        _stravaUI('error', data.message || 'Error de autenticación');
+      }
+    } catch(e) {
+      _stravaUI('error', 'Error: ' + e.message);
+    }
+  },
+
+  async fetchActivities(perPage = 30) {
+    if (!this.token) return;
+    try {
+      const res = await fetch(
+        `https://www.strava.com/api/v3/athlete/activities?per_page=${perPage}`,
+        { headers: { Authorization: `Bearer ${this.token}` } }
+      );
+      const all = await res.json();
+      if (Array.isArray(all))
+        this.activities = all.filter(a => a.sport_type === 'Run' || a.type === 'Run');
+    } catch(e) { console.error('Strava fetch error:', e); }
+    return this.activities;
+  }
+};
+
+function _stravaUI(state, msg) {
+  const dot = document.getElementById('s-dot');
+  const txt = document.getElementById('s-status-txt');
+  const btn = document.getElementById('btn-strava-main');
+  if (state === 'ok') {
+    dot.classList.add('on');
+    txt.textContent = msg;
+    btn.textContent = '✓ ' + msg;
+    btn.disabled = true;
+    // update total stats to include Strava
+    const stravaKm = STRAVA.activities.reduce((a,r) => a + r.distance/1000, 0);
+    const totalKm = CAMILA_RUNS.reduce((a,r) => a + r.distance_km, 0) + stravaKm;
+    document.getElementById('s-km').textContent = totalKm.toFixed(1);
+    document.getElementById('s-runs').textContent = CAMILA_RUNS.length + STRAVA.activities.length;
+  } else if (state === 'loading') {
+    txt.textContent = msg;
+    btn.disabled = true;
+  } else {
+    txt.textContent = '⚠️ ' + msg;
+    btn.disabled = false;
+  }
+}
+
+function renderStravaActivities() {
+  if (!STRAVA.activities.length) return;
+  const sec = document.getElementById('strava-acts-section');
+  sec.style.display = '';
+  const list = document.getElementById('strava-acts-list');
+  list.innerHTML = STRAVA.activities.slice(0,12).map(a => {
+    const dist  = (a.distance/1000).toFixed(2);
+    const pace  = a.average_speed > 0 ? 1000/a.average_speed/60 : 0;
+    const pm    = Math.floor(pace);
+    const ps    = Math.round((pace-pm)*60).toString().padStart(2,'0');
+    const date  = new Date(a.start_date_local).toLocaleDateString('es-ES',{day:'2-digit',month:'short'});
+    return `<div class="act-row">
+      <span class="act-date">${date}</span>
+      <span class="act-name">${a.name}</span>
+      <span class="act-dist">${dist} km</span>
+      <span class="act-pace">${pm}:${ps}/km</span>
+      <span class="act-badge">STRAVA</span>
+    </div>`;
+  }).join('');
+}
+
+// Check for OAuth callback on page load
+(function initStrava() {
+  const p   = new URLSearchParams(window.location.search);
+  const err = p.get('error');
+  const code= p.get('code');
+  if (err || !code) return;
+  window.history.replaceState({}, '', window.location.pathname);
+  STRAVA.exchangeCode(code);
+})();
+
+
+// ═══════════════════════════════════════════════════════════════════
+// CAMILA — HISTORIAL APPLE HEALTH (43 carreras limpias)
+// ═══════════════════════════════════════════════════════════════════
+const CAMILA_RUNS = [
+  {date:'2023-04-25',distance_km:1.80,duration_min:13.5,pace:7.50},
+  {date:'2023-04-27',distance_km:1.84,duration_min:15.0,pace:8.16},
+  {date:'2023-04-29',distance_km:1.61,duration_min:11.5,pace:7.13},
+  {date:'2023-05-02',distance_km:1.37,duration_min:11.0,pace:8.03},
+  {date:'2023-05-03',distance_km:1.62,duration_min:12.5,pace:7.72},
+  {date:'2025-09-04',distance_km:3.98,duration_min:38.1,pace:9.57},
+  {date:'2025-09-05',distance_km:4.93,duration_min:40.4,pace:8.20},
+  {date:'2025-09-07',distance_km:3.61,duration_min:34.7,pace:9.62},
+  {date:'2025-09-09',distance_km:4.02,duration_min:37.8,pace:9.40},
+  {date:'2025-09-10',distance_km:4.83,duration_min:42.3,pace:8.75},
+  {date:'2025-09-12',distance_km:3.83,duration_min:35.4,pace:9.24},
+  {date:'2025-09-17',distance_km:4.25,duration_min:37.3,pace:8.77},
+  {date:'2025-09-19',distance_km:4.94,duration_min:41.6,pace:8.42},
+  {date:'2025-09-21',distance_km:4.85,duration_min:47.3,pace:9.75},
+  {date:'2025-09-24',distance_km:4.07,duration_min:38.4,pace:9.43},
+  {date:'2025-09-26',distance_km:5.51,duration_min:48.1,pace:8.73},
+  {date:'2025-09-28',distance_km:5.49,duration_min:52.4,pace:9.54},
+  {date:'2025-10-01',distance_km:6.49,duration_min:65.3,pace:10.06},
+  {date:'2025-10-03',distance_km:5.24,duration_min:45.3,pace:8.65},
+  {date:'2025-10-05',distance_km:6.74,duration_min:69.5,pace:10.31},
+  {date:'2025-10-07',distance_km:3.70,duration_min:33.9,pace:9.16},
+  {date:'2025-10-09',distance_km:3.91,duration_min:36.5,pace:9.34},
+  {date:'2025-10-11',distance_km:5.03,duration_min:41.4,pace:8.23},
+  {date:'2025-10-20',distance_km:4.00,duration_min:37.1,pace:9.28},
+  {date:'2025-10-22',distance_km:4.49,duration_min:39.3,pace:8.75},
+  {date:'2025-10-27',distance_km:5.01,duration_min:44.0,pace:8.78},
+  {date:'2025-10-29',distance_km:4.51,duration_min:44.7,pace:9.91},
+  {date:'2025-11-04',distance_km:4.65,duration_min:39.7,pace:8.54},
+  {date:'2025-11-06',distance_km:6.05,duration_min:52.4,pace:8.66},
+  {date:'2025-11-10',distance_km:5.15,duration_min:46.0,pace:8.93},
+  {date:'2025-11-13',distance_km:5.57,duration_min:49.6,pace:8.91},
+  {date:'2025-11-15',distance_km:7.04,duration_min:60.9,pace:8.65},
+  {date:'2026-03-15',distance_km:14.02,duration_min:107.2,pace:7.65},
+  {date:'2026-03-25',distance_km:5.63,duration_min:44.0,pace:7.82},
+  {date:'2026-03-29',distance_km:9.87,duration_min:68.8,pace:6.97},
+  {date:'2026-04-08',distance_km:6.01,duration_min:63.2,pace:10.52},
+  {date:'2026-04-13',distance_km:7.02,duration_min:52.9,pace:7.54},
+  {date:'2026-04-15',distance_km:7.71,duration_min:59.4,pace:7.70},
+  {date:'2026-04-18',distance_km:1.12,duration_min:9.0,pace:8.04},
+  {date:'2026-04-22',distance_km:7.01,duration_min:58.6,pace:8.36},
+  {date:'2026-04-25',distance_km:7.45,duration_min:61.7,pace:8.28},
+  {date:'2026-04-28',distance_km:6.02,duration_min:47.9,pace:7.96},
+  {date:'2026-05-01',distance_km:7.73,duration_min:60.7,pace:7.85},
+];
+
+// ── Running page charts & table ──
+let _dChart, _pChart, _mChart;
+
+function pStr(p){ const m=Math.floor(p),s=Math.round((p-m)*60).toString().padStart(2,'0'); return `${m}:${s}`; }
+function pClass(p){ return p<8?'pp-fast':p<9.5?'pp-med':'pp-slow'; }
+
+function renderRunPage(){
+  // Charts
+  Chart.defaults.color='#8A7A78';
+  Chart.defaults.borderColor='rgba(92,18,35,0.07)';
+  if(_dChart)_dChart.destroy();
+  if(_pChart)_pChart.destroy();
+  if(_mChart)_mChart.destroy();
+
+  const runs = CAMILA_RUNS;
+
+  _dChart = new Chart(document.getElementById('distChart'),{
+    type:'bar',
+    data:{
+      labels: runs.map(r=>r.date.slice(5)),
+      datasets:[{
+        data: runs.map(r=>r.distance_km),
+        backgroundColor: runs.map(r=>r.date<'2024'?'rgba(212,128,154,.55)':r.date<'2026'?'rgba(92,18,35,.5)':'rgba(92,18,35,.78)'),
+        borderColor: runs.map(r=>r.date<'2024'?'#D4809A':r.date<'2026'?'#7B2035':'#5C1223'),
+        borderWidth:1, borderRadius:3,
+      }]
+    },
+    options:{
+      responsive:true,
+      plugins:{legend:{display:false},tooltip:{callbacks:{
+        title:i=>runs[i[0].dataIndex].date, label:i=>` ${i.raw} km`
+      }}},
+      scales:{
+        x:{ticks:{maxTicksLimit:14,font:{size:10}}},
+        y:{beginAtZero:true,ticks:{callback:v=>v+' km'}}
+      }
+    }
+  });
+
+  _pChart = new Chart(document.getElementById('paceChart'),{
+    type:'line',
+    data:{
+      labels: runs.map(r=>r.date.slice(5)),
+      datasets:[{
+        data: runs.map(r=>+r.pace.toFixed(2)),
+        borderColor:'#7B2035', backgroundColor:'rgba(92,18,35,.06)',
+        pointRadius:4, pointBackgroundColor:'#7B2035',
+        pointBorderColor:'#fff', pointBorderWidth:1.5,
+        tension:.35, fill:true,
+      }]
+    },
+    options:{
+      responsive:true,
+      plugins:{legend:{display:false}},
+      scales:{
+        x:{ticks:{maxTicksLimit:10,font:{size:10}}},
+        y:{reverse:true,min:6,max:12,
+          ticks:{callback:v=>{const m=Math.floor(v);const s=Math.round((v-m)*60).toString().padStart(2,'0');return `${m}:${s}`}}}
+      }
+    }
+  });
+
+  // Monthly
+  const mm={};
+  runs.forEach(r=>{ const k=r.date.slice(0,7); mm[k]=(mm[k]||0)+r.distance_km; });
+  const months=Object.keys(mm).sort();
+  const ML=['','Ene','Feb','Mar','Abr','May','Jun','Jul','Ago','Sep','Oct','Nov','Dic'];
+
+  _mChart = new Chart(document.getElementById('monthChart'),{
+    type:'bar',
+    data:{
+      labels:months.map(m=>{const[y,mo]=m.split('-');return ML[+mo]+" '"+y.slice(2);}),
+      datasets:[{
+        data:months.map(m=>+mm[m].toFixed(1)),
+        backgroundColor:'rgba(92,18,35,.55)',
+        borderColor:'#5C1223',borderWidth:1,borderRadius:4,
+      }]
+    },
+    options:{
+      responsive:true,
+      plugins:{legend:{display:false}},
+      scales:{x:{ticks:{font:{size:10}}},y:{beginAtZero:true,ticks:{callback:v=>v+' km'}}}
+    }
+  });
+
+  // Table
+  const tbody=document.getElementById('runs-body');
+  const sorted=[...runs].reverse();
+  let lastPh='';
+  const phOf=d=>d<'2024'?'🌱 Inicio — 2023':d<'2026'?'📈 Regreso — 2025':'🔥 Nivel actual — 2026';
+  tbody.innerHTML=sorted.map(r=>{
+    const ph=phOf(r.date);
+    let pr='';
+    if(ph!==lastPh){pr=`<tr class="phase-row"><td colspan="5">${ph}</td></tr>`;lastPh=ph;}
+    return pr+`<tr>
+      <td>${r.date}</td>
+      <td><strong>${r.distance_km.toFixed(2)} km</strong></td>
+      <td>${Math.round(r.duration_min)} min</td>
+      <td><span class="pp ${pClass(r.pace)}">${pStr(r.pace)}/km</span></td>
+      <td style="font-size:10px;color:var(--g3)">Apple Watch</td>
+    </tr>`;
+  }).join('');
+}
+
+
+// ═══════════════════════════════════════════════════════════════════
+// CYCLE PHASES
+// ═══════════════════════════════════════════════════════════════════
+const PHASES=[
+  {name:'Menstrual', days:[1,2,3,4,5],            tag:'menstrual',emoji:'🌑',note:'Baja intensidad. El cuerpo pide suavidad.'},
+  {name:'Folicular', days:[6,7,8,9,10,11,12,13,14],tag:'folicular',emoji:'🌿',note:'Máxima energía. Mejor momento para cargar.'},
+  {name:'Ovulación', days:[15,16,17],              tag:'folicular',emoji:'✨',note:'Pico de rendimiento. Calienta bien.'},
+  {name:'Lútea',     days:[18,19,20,21,22,23,24,25,26,27,28],tag:'lutea',emoji:'🌙',note:'FC naturalmente más alta. No te compares.'},
+];
+function getPhase(d){return PHASES.find(p=>p.days.includes(d))||PHASES[0]}
+
+// ═══════════════════════════════════════════════════════════════════
+// WEEK TEMPLATES
+// nutType guía la nutrición internamente; label = lo que ve el usuario
+// ═══════════════════════════════════════════════════════════════════
+const WEEK_TEMPLATES={
+  folicular:[
+    {num:1,type:'run', icon:'🏃‍♀️',label:'Entrenamiento\nRunna', time:'18:30',nutType:'z2'},
+    {num:2,type:'gym', icon:'💪',  label:'Gym\nTren Superior',    time:'18:30'},
+    {num:3,type:'run', icon:'🏃‍♀️',label:'Entrenamiento\nRunna', time:'18:30',nutType:'calidad'},
+    {num:4,type:'rest',icon:'🧘‍♀️',label:'Descanso\nactivo',      time:'—'},
+    {num:5,type:'gym', icon:'🦵',  label:'Gym\nTren Inferior',    time:'18:30'},
+    {num:6,type:'run', icon:'🏃‍♀️',label:'Entrenamiento\nRunna', time:'09:00',nutType:'largo'},
+    {num:7,type:'rest',icon:'☁️', label:'Descanso\ntotal',         time:'—'},
+  ],
+  lutea:[
+    {num:1,type:'run', icon:'🏃‍♀️',label:'Entrenamiento\nRunna', time:'18:30',nutType:'z2'},
+    {num:2,type:'gym', icon:'🤸‍♀️',label:'Gym\nTren Superior',   time:'18:30'},
+    {num:3,type:'run', icon:'🏃‍♀️',label:'Entrenamiento\nRunna', time:'18:30',nutType:'z2'},
+    {num:4,type:'rest',icon:'🛁', label:'Descanso\ntotal',          time:'—'},
+    {num:5,type:'gym', icon:'🦵', label:'Gym\nPierna suave',      time:'18:30'},
+    {num:6,type:'run', icon:'🏃‍♀️',label:'Entrenamiento\nRunna', time:'09:00',nutType:'z2'},
+    {num:7,type:'rest',icon:'☁️',label:'Descanso',                 time:'—'},
+  ],
+  menstrual:[
+    {num:1,type:'rest',icon:'🌑', label:'Descanso\nactivo',        time:'—'},
+    {num:2,type:'run', icon:'🏃‍♀️',label:'Entrenamiento\nRunna', time:'18:30',nutType:'z2'},
+    {num:3,type:'rest',icon:'🧘‍♀️',label:'Movilidad\nYoga',       time:'18:30'},
+    {num:4,type:'gym', icon:'🤸‍♀️',label:'Gym\nTren Superior',   time:'18:30'},
+    {num:5,type:'rest',icon:'🌿', label:'Descanso',                 time:'—'},
+    {num:6,type:'run', icon:'🏃‍♀️',label:'Entrenamiento\nRunna', time:'09:00',nutType:'z2'},
+    {num:7,type:'rest',icon:'☁️',label:'Descanso\ntotal',          time:'—'},
+  ],
+};
+
+// ═══════════════════════════════════════════════════════════════════
+// GYM ROUTINES
+// ═══════════════════════════════════════════════════════════════════
+const GYM={
+  upper:{title:'Tren Superior',blocks:[
+    {n:'Calentamiento',d:'Movilidad hombros + rotador manguito',s:'5 min'},
+    {n:'Press banca inclinado (mancuernas)',d:'Pecho y hombro anterior',s:'4×10–12'},
+    {n:'Remo con mancuerna',d:'Unilateral — espalda alta y bíceps',s:'3×12 c/l'},
+    {n:'Press militar (mancuernas)',d:'Deltoides sentada',s:'3×10'},
+    {n:'Pull-down en polea / jalón',d:'Espalda ancha, latísimo',s:'3×12'},
+    {n:'Curl bíceps + Extensión tríceps',d:'Superset',s:'3×12'},
+    {n:'Core: plancha + pallof press',d:'Estabilidad y antirotación',s:'3×30 s'},
+  ]},
+  lower:{title:'Tren Inferior',blocks:[
+    {n:'Calentamiento',d:'Activación glúteo con banda + movilidad cadera',s:'8 min'},
+    {n:'Sentadilla con barra / goblet',d:'Cuádriceps y glúteos. Profundidad completa.',s:'4×10'},
+    {n:'Hip thrust con barra',d:'Glúteo mayor — ejercicio clave del plan',s:'4×12'},
+    {n:'Peso muerto rumano (RDL)',d:'Isquiotibiales y glúteo. Espalda neutra.',s:'3×10'},
+    {n:'Zancada búlgara',d:'Cuádriceps y equilibrio, unilateral',s:'3×10 c/l'},
+    {n:'Extensión de cadera en polea',d:'Aislamiento de glúteo',s:'3×15'},
+    {n:'Abductores en máquina',d:'Estabilidad lateral de cadera',s:'3×20'},
+  ]},
+  lower_soft:{title:'Pierna Suave',blocks:[
+    {n:'Calentamiento + foam roller',d:'Cuádriceps, isquios, cadera',s:'8 min'},
+    {n:'Sentadilla goblet (peso ligero)',d:'Enfocada en técnica',s:'3×12'},
+    {n:'Hip thrust (peso moderado)',d:'Calidad sobre cantidad',s:'3×15'},
+    {n:'Peso muerto rumano ligero',d:'Isquiotibiales y glúteo',s:'3×12'},
+    {n:'Extensión de cadera en polea',d:'Aislamiento de glúteo',s:'3×20'},
+    {n:'Stretching completo pierna',d:'Cuádriceps, isquios, cadera',s:'8 min'},
+  ]},
+  upper_soft:{title:'Tren Superior Suave',blocks:[
+    {n:'Calentamiento',d:'Movilidad hombros y cuello',s:'5 min'},
+    {n:'Press banca inclinado (ligero)',d:'−15–20% de carga, más reps',s:'3×15'},
+    {n:'Remo en polea (ligero)',d:'Espalda y bíceps, ritmo controlado',s:'3×15'},
+    {n:'Elevaciones laterales hombro',d:'Peso muy moderado',s:'3×15'},
+    {n:'Curl bíceps + Extensión tríceps',d:'Ligero y fluido',s:'3×15'},
+    {n:'Stretching y respiración',d:'Cierre suave',s:'5 min'},
+  ]},
+};
+
+// ═══════════════════════════════════════════════════════════════════
+// ═══════════════════════════════════════════════════════════════════
+// MACRO BLOCKS — porciones estándar de referencia
+// ═══════════════════════════════════════════════════════════════════
+const MACRO_BLOCKS={
+  prot_lean:{label:'Proteína magra',    qty:'160g',            macro:'~38g P · 3g G',         cat:'prot', ex:'Pollo, pavo, merluza, bacalao, atún al natural'},
+  prot_fish:{label:'Pescado graso',     qty:'180g',            macro:'~36g P · 14g G',        cat:'prot', ex:'Salmón, caballa, sardinas, boquerones'},
+  prot_egg: {label:'Huevos',            qty:'2 ud + 1 clara',  macro:'~20g P · 7g G',         cat:'prot', ex:'2 huevos enteros + 1 clara'},
+  prot_leg: {label:'Legumbre',          qty:'150g cocidas',    macro:'~18g P · 28g C · 5g G', cat:'prot', ex:'Garbanzos, lentejas, alubias blancas'},
+  dairy_gk: {label:'Yogur griego',      qty:'200g',            macro:'~18g P · 8g C · 5g G',  cat:'prot', ex:'Natural 0% grasa, sin azúcar añadido'},
+  whey:     {label:'Proteína whey',     qty:'25g polvo',       macro:'~20g P · 2g G',         cat:'prot', ex:'Con agua o leche desnatada'},
+  carb_oat: {label:'Avena',             qty:'70g seco',        macro:'~50g C · 8g P',         cat:'carb', ex:'En copos, con leche desnatada o agua'},
+  carb_slow:{label:'Carbohidrato lento',qty:'80g seco',        macro:'~60g C · 8g P',         cat:'carb', ex:'Arroz integral, quinoa, cebada'},
+  carb_fast:{label:'Carbohidrato',      qty:'80g seco',        macro:'~65g C · 7g P',         cat:'carb', ex:'Arroz blanco, pasta blanca, arroz basmati'},
+  carb_tub: {label:'Tubérculo',         qty:'200g cocido',     macro:'~36g C · 3g P',         cat:'carb', ex:'Patata, boniato, yuca'},
+  carb_br:  {label:'Pan integral',      qty:'60g (2 reb.)',    macro:'~34g C · 7g P',         cat:'carb', ex:'Pan de centeno, espelta o 100% integral'},
+  carb_ban: {label:'Fruta energética',  qty:'1 ud (120g)',     macro:'~27g C · 1g P',         cat:'carb', ex:'Plátano — o 30g de dátiles'},
+  fruit:    {label:'Fruta',             qty:'1 pieza med.',    macro:'~15g C · 0.5g P',       cat:'carb', ex:'Naranja, kiwi, manzana, pera, fresas'},
+  fat_oil:  {label:'Aceite de oliva',   qty:'10ml',            macro:'~9g G',                 cat:'fat',  ex:'AOVE extra virgen — para cocinar o aliñar'},
+  fat_avo:  {label:'Aguacate',          qty:'50g',             macro:'~7g G · 1g C',          cat:'fat',  ex:'Maduro — sobre tostada o en ensalada'},
+  fat_nuts: {label:'Frutos secos',      qty:'15g',             macro:'~9g G · 3g P',          cat:'fat',  ex:'Nueces, almendras, anacardos — sin sal'},
+  veg:      {label:'Verdura libre',     qty:'200g',            macro:'~8g C · 2g P',          cat:'veg',  ex:'Cualquier verdura — espinacas, brócoli, calabacín, pimiento, berenjena…'},
+};
+
+const REF_GROUPS=[
+  {cls:'rg-prot',title:'Proteínas', keys:['prot_lean','prot_fish','prot_egg','prot_leg','dairy_gk','whey']},
+  {cls:'rg-carb',title:'Carbohidratos',keys:['carb_oat','carb_slow','carb_fast','carb_tub','carb_br','carb_ban','fruit']},
+  {cls:'rg-fat', title:'Grasas',    keys:['fat_oil','fat_avo','fat_nuts']},
+  {cls:'rg-veg', title:'Verduras',  keys:['veg']},
+];
+
+// ═══════════════════════════════════════════════════════════════════
+// NUTRITION DATA — cada comida referencia bloques de MACRO_BLOCKS
+// ═══════════════════════════════════════════════════════════════════
+const NUT_PLANS={
+  run_z2_eve:{
+    label:'Running — Tarde',badge:'tb-run',kcal:1800,prot:155,carb:180,fat:50,
+    note:'Entrenas a las 18:30. Carbos distribuidos durante el día, sin grasa en el snack pre-run.',
+    meals:[
+      {name:'Desayuno',time:'07:30',icon:'☀️',kcal:440,prot:28,carb:52,fat:12,
+       note:'Desayuno completo — proteína + carbo + grasa para arrancar el día.',
+       blocks:['carb_oat','prot_egg','fat_avo','fruit']},
+      {name:'Comida',time:'13:00',icon:'🍱',kcal:520,prot:46,carb:58,fat:10,
+       note:'Comida equilibrada. Sin grasa extra — la proteína y carbos son suficientes.',
+       blocks:['prot_lean','carb_slow','veg']},
+      {name:'Pre-run',time:'17:30',icon:'⚡',kcal:190,prot:10,carb:32,fat:0,
+       note:'Solo carbos + proteína ligera. La grasa enlentece la digestión — evítala pre-carrera.',
+       blocks:['carb_ban','dairy_gk']},
+      {name:'Cena post-run',time:'20:30',icon:'🌙',kcal:650,prot:71,carb:38,fat:14,
+       note:'Recuperación. El omega-3 del salmón es antiinflamatorio — grasa del propio pescado, sin añadir más.',
+       blocks:['prot_fish','carb_tub','veg']},
+    ]
+  },
+  run_quality_eve:{
+    label:'Running Calidad — Tarde',badge:'tb-run',kcal:1950,prot:160,carb:210,fat:44,
+    note:'Sesión de intervalos — la más exigente. Carbos altos todo el día, grasa mínima cerca del entreno.',
+    meals:[
+      {name:'Desayuno',time:'07:30',icon:'☀️',kcal:480,prot:28,carb:62,fat:10,
+       note:'Más carbos que un día normal — necesitarás el glucógeno esta tarde.',
+       blocks:['carb_oat','prot_egg','fat_nuts','fruit']},
+      {name:'Comida',time:'13:00',icon:'🍱',kcal:600,prot:46,carb:78,fat:8,
+       note:'Carbos altos en comida. Prepara los músculos para los intervalos.',
+       blocks:['prot_lean','carb_fast','carb_tub','veg']},
+      {name:'Pre-run calidad',time:'17:30',icon:'⚡',kcal:220,prot:6,carb:50,fat:0,
+       note:'Solo carbos rápidos — máximo glucógeno disponible para los intervalos.',
+       blocks:['carb_br','carb_ban']},
+      {name:'Cena post-run',time:'21:00',icon:'🌙',kcal:650,prot:80,carb:20,fat:26,
+       note:'Post-calidad: proteína muy alta + vegetales. Los carbos ya están de sobra del día.',
+       blocks:['prot_lean','prot_leg','veg','fat_oil']},
+    ]
+  },
+  run_long_morn:{
+    label:'Running Largo — Mañana',badge:'tb-run',kcal:1950,prot:155,carb:210,fat:54,
+    note:'Rodaje largo en ayunas o con desayuno ligero. Recuperación completa en el almuerzo.',
+    meals:[
+      {name:'Desayuno pre-run',time:'08:00',icon:'🌅',kcal:460,prot:22,carb:72,fat:6,
+       note:'75–90 min antes de salir. Carbos como base — mínima grasa para digestión rápida.',
+       blocks:['carb_oat','carb_ban','prot_egg']},
+      {name:'Almuerzo post-run',time:'13:30',icon:'☀️',kcal:680,prot:54,carb:76,fat:16,
+       note:'Comida más importante del fin de semana. Proteína + carbos + verdura + grasa — todo.',
+       blocks:['prot_lean','carb_fast','veg','fat_oil']},
+      {name:'Snack tarde',time:'17:00',icon:'🍎',kcal:260,prot:22,carb:22,fat:9,
+       note:'Solo proteína + grasa — los carbos ya están cubiertos del día.',
+       blocks:['dairy_gk','fat_nuts']},
+      {name:'Cena',time:'20:30',icon:'🌙',kcal:550,prot:57,carb:40,fat:18,
+       blocks:['prot_fish','carb_tub','veg']},
+    ]
+  },
+  gym_upper_eve:{
+    label:'Gym Tren Superior — Tarde',badge:'tb-gym',kcal:1950,prot:170,carb:188,fat:58,
+    note:'Gym a las 18:30. Desayuno con grasa para la mañana, pre-gym solo proteína + carbo.',
+    meals:[
+      {name:'Desayuno',time:'07:30',icon:'☀️',kcal:430,prot:30,carb:38,fat:16,
+       note:'Mañana tranquila — proteína + grasa como base, carbos moderados.',
+       blocks:['prot_egg','carb_br','fat_avo']},
+      {name:'Comida',time:'13:00',icon:'🍱',kcal:570,prot:46,carb:66,fat:12,
+       note:'Carbos altos para cargar energía para el gym de tarde.',
+       blocks:['prot_lean','carb_fast','veg','fat_oil']},
+      {name:'Pre-gym',time:'17:30',icon:'💪',kcal:230,prot:22,carb:26,fat:0,
+       note:'Solo proteína + carbos rápidos. Sin grasa — enlentece la absorción.',
+       blocks:['whey','carb_ban']},
+      {name:'Cena post-gym',time:'20:30',icon:'🌙',kcal:720,prot:72,carb:58,fat:30,
+       note:'Ventana anabólica: proteína alta + carbos de recuperación + grasa de calidad.',
+       blocks:['prot_lean','carb_slow','veg','fat_nuts']},
+    ]
+  },
+  gym_lower_eve:{
+    label:'Gym Tren Inferior — Tarde',badge:'tb-gym',kcal:1950,prot:170,carb:200,fat:50,
+    note:'Día de pierna — más exigente. Carbos muy altos todo el día, salmón post-gym por el omega-3.',
+    meals:[
+      {name:'Desayuno',time:'07:30',icon:'☀️',kcal:490,prot:28,carb:62,fat:12,
+       note:'Más carbos que en un día normal — las piernas los van a necesitar.',
+       blocks:['carb_oat','prot_egg','fat_nuts','carb_ban']},
+      {name:'Comida',time:'13:00',icon:'🍱',kcal:580,prot:46,carb:70,fat:8,
+       note:'Alta carga de carbos en comida — cruciales para el rendimiento en pierna.',
+       blocks:['prot_lean','carb_tub','carb_slow','veg']},
+      {name:'Pre-gym pierna',time:'17:30',icon:'🦵',kcal:200,prot:20,carb:22,fat:0,
+       note:'Solo proteína + carbos. Sin grasa — el estómago lo agradecerá en sentadilla.',
+       blocks:['whey','carb_ban']},
+      {name:'Cena post-gym',time:'21:00',icon:'🌙',kcal:680,prot:76,carb:46,fat:22,
+       note:'Salmón — omega-3 antiinflamatorio, reduce las agujetas. Carbos + proteína.',
+       blocks:['prot_fish','carb_fast','veg']},
+    ]
+  },
+  rest:{
+    label:'Descanso activo',badge:'tb-rest',kcal:1650,prot:145,carb:120,fat:60,
+    note:'Sin entreno: carbos bajos, proteína alta y grasas saludables. El cuerpo reparar hoy.',
+    meals:[
+      {name:'Desayuno',time:'07:30',icon:'☀️',kcal:380,prot:26,carb:24,fat:20,
+       note:'Descanso — sin necesidad de cargar carbos. Proteína + grasa como base.',
+       blocks:['prot_egg','fat_avo','carb_br']},
+      {name:'Comida',time:'13:00',icon:'🍱',kcal:480,prot:52,carb:18,fat:22,
+       note:'Carbos mínimos en descanso. Proteína doble + verdura + grasa de calidad.',
+       blocks:['prot_lean','prot_leg','veg','fat_oil']},
+      {name:'Snack',time:'17:00',icon:'🍎',kcal:260,prot:22,carb:16,fat:12,
+       note:'Proteína lenta + grasa — ideal en descanso para mantener músculo.',
+       blocks:['dairy_gk','fat_nuts']},
+      {name:'Cena',time:'20:30',icon:'🌙',kcal:530,prot:45,carb:62,fat:6,
+       note:'Los únicos carbos importantes del día van a la cena — preparan el cuerpo para el entreno de mañana.',
+       blocks:['prot_lean','carb_tub','veg']},
+    ]
+  },
+  rest_total:{
+    label:'Descanso total',badge:'tb-rest',kcal:1650,prot:140,carb:100,fat:68,
+    note:'Descanso completo — el día más bajo en carbos de la semana. Proteína + grasas buenas.',
+    meals:[
+      {name:'Desayuno',time:'09:00',icon:'☀️',kcal:400,prot:26,carb:26,fat:22,
+       note:'Sin prisa — desayuno con proteína y grasa, carbos mínimos.',
+       blocks:['prot_egg','fat_avo','carb_br']},
+      {name:'Almuerzo',time:'14:00',icon:'🍽️',kcal:520,prot:48,carb:24,fat:26,
+       note:'Domingo puede ser social. Elige proteína magra + verdura + grasa. Sin arroz ni pasta hoy.',
+       blocks:['prot_lean','veg','fat_oil']},
+      {name:'Snack',time:'17:30',icon:'🍎',kcal:210,prot:18,carb:24,fat:6,
+       note:'Un poco de carbos en la tarde — preparan el cuerpo para el lunes.',
+       blocks:['dairy_gk','fruit']},
+      {name:'Cena',time:'20:30',icon:'🌙',kcal:520,prot:48,carb:26,fat:14,
+       note:'Cena ligera con carbos moderados — mañana entrenas.',
+       blocks:['prot_lean','carb_tub','veg','fat_oil']},
+    ]
+  },
+};
+
+// ─ nutKey mapping ─
+function getNutKey(d){
+  if(d.type==='rest') return d.num===7?'rest_total':'rest';
+  if(d.type==='run'){
+    if(d.nutType==='largo')   return 'run_long_morn';
+    if(d.nutType==='calidad') return 'run_quality_eve';
+    return 'run_z2_eve';
+  }
+  if(d.type==='gym'){
+    if(d.label.includes('Inferior')||d.label.includes('Pierna')) return 'gym_lower_eve';
+    return 'gym_upper_eve';
+  }
+  return 'rest';
+}
+
+
+// ═══════════════════════════════════════════════════════════════════
+// TRAINING UI
+// ═══════════════════════════════════════════════════════════════════
+let cycleDay=7, selDay=null;
+
+function buildSegTrack(){
+  const t=document.getElementById('t-seg-track');
+  const cls=[...'mens'.repeat(5).split(''),...'fol '.repeat(9).trim().split(' '),...'ovu '.repeat(3).trim().split(' '),...'lut '.repeat(11).trim().split(' ')];
+  // simpler approach:
+  const clsArr=[...Array(5).fill('mens'),...Array(9).fill('fol'),...Array(3).fill('ovu'),...Array(11).fill('lut')];
+  clsArr.forEach((c,i)=>{
+    const s=document.createElement('div');
+    s.className='seg '+c;
+    s.onclick=()=>{document.getElementById('t-slider').value=i+1;setCycleDay(i+1)};
+    t.appendChild(s);
+  });
+}
+
+function updateSegs(day){
+  document.querySelectorAll('.seg').forEach((s,i)=>s.classList.toggle('on',i===day-1));
+}
+
+function setCycleDay(day){
+  cycleDay=day;
+  const ph=getPhase(day);
+  document.getElementById('t-day-num').textContent=day;
+  const pb=document.getElementById('t-phase-badge');
+  pb.textContent=ph.emoji+' '+ph.name;
+  pb.className='phase-badge '+ph.tag;
+  updateSegs(day);
+  renderDayGrid(ph);
+  selDay=null;
+  document.getElementById('t-detail').classList.remove('open');
+  document.querySelectorAll('.dc').forEach(c=>c.classList.remove('selected'));
+  document.getElementById('t-week-lbl').textContent='Tu semana — Fase '+ph.name;
+}
+
+function getWeek(ph){
+  if(ph.name==='Menstrual') return WEEK_TEMPLATES.menstrual;
+  if(ph.name==='Lútea')     return WEEK_TEMPLATES.lutea;
+  return WEEK_TEMPLATES.folicular;
+}
+
+function renderDayGrid(ph){
+  const week=getWeek(ph);
+  const g=document.getElementById('t-day-grid');
+  g.innerHTML='';
+  week.forEach((d,i)=>{
+    const c=document.createElement('div');
+    c.className='dc '+d.type;
+    c.innerHTML=`<div class="dc-num">Día ${d.num}</div>
+      <div class="dc-icon">${d.icon}</div>
+      <div class="dc-label">${d.label.replace('\n','<br>')}</div>
+      <div class="dc-time">${d.time}</div>`;
+    c.onclick=()=>openDayDetail(i,d,ph);
+    g.appendChild(c);
+  });
+}
+
+function openDayDetail(idx,dayObj,ph){
+  if(selDay===idx){
+    selDay=null;
+    document.getElementById('t-detail').classList.remove('open');
+    document.querySelectorAll('.dc').forEach(c=>c.classList.remove('selected'));
+    return;
+  }
+  selDay=idx;
+  document.querySelectorAll('.dc').forEach((c,i)=>c.classList.toggle('selected',i===idx));
+  const det=document.getElementById('t-detail');
+  det.classList.remove('open');
+  setTimeout(()=>{
+    if(dayObj.type==='gym')       buildGymDetail(dayObj,ph);
+    else if(dayObj.type==='run')  buildRunDetail(dayObj,ph);
+    else                          buildRestDetail(dayObj);
+    det.classList.add('open');
+    det.scrollIntoView({behavior:'smooth',block:'nearest'});
+  },50);
+}
+
+// ── GYM DETAIL ──
+function getGymData(dayObj,ph){
+  const soft=ph.name==='Lútea'||ph.name==='Menstrual';
+  if(dayObj.label.includes('Inferior')||dayObj.label.includes('Pierna')) return soft?GYM.lower_soft:GYM.lower;
+  return soft?GYM.upper_soft:GYM.upper;
+}
+
+function buildGymDetail(dayObj,ph){
+  const r=getGymData(dayObj,ph);
+  const soft=ph.name==='Lútea'||ph.name==='Menstrual';
+  const phNote=soft
+    ?`<div class="phase-note"><span class="pni">${ph.emoji}</span> Fase ${ph.name}: pesos bajos, más reps. No es momento de récords — es de mantener la consistencia.</div>`
+    :`<div class="phase-note"><span class="pni">🌿</span> Fase Folicular: máxima fuerza disponible. Progresa en pesos si la técnica lo permite.</div>`;
+  const timeNote=`<div class="phase-note"><span class="pni">🕕</span> Entreno a las 18:30 — después del trabajo. Come el snack pre-gym a las 17:30.</div>`;
+  const blocks=r.blocks.map((b,i)=>`<div class="rb"><div class="rb-n">${String(i+1).padStart(2,'0')}</div>
+    <div class="rb-info"><h4>${b.n}</h4><p>${b.d||''}</p></div>
+    <div class="rb-badge">${b.s}</div></div>`).join('');
+  document.getElementById('t-detail').innerHTML=
+    `<div class="dh gym-h">
+      <div><div class="dh-eye">Día ${dayObj.num} · Gym</div><div class="dh-title">${r.title}</div></div>
+      <div class="dh-icon">💪</div>
+    </div>
+    <div class="dbody gym-detail">${phNote}${timeNote}<div class="rblocks">${blocks}</div></div>`;
+}
+
+// ── RUN DETAIL ──
+function buildRunDetail(dayObj,ph){
+  const isMorn = dayObj.time==='09:00';
+  const timeNote = isMorn
+    ? `<div class="phase-note"><span class="pni">🌅</span> Sesión de mañana — desayuna 75–90 min antes de salir.</div>`
+    : `<div class="phase-note"><span class="pni">🕕</span> Sesión a las 18:30 — come el snack pre-run a las 17:30 antes de salir del trabajo.</div>`;
+  const phNote = (ph.name==='Lútea'||ph.name==='Menstrual')
+    ? `<div class="phase-note"><span class="pni">${ph.emoji}</span> Fase ${ph.name}: la FC puede ir algo más alta de lo habitual. Es normal — no compares con tus mejores días.</div>`
+    : '';
+  const stravaWidget = STRAVA.connected
+    ? `<div style="background:var(--cream);border-radius:12px;padding:16px 20px;border:1px solid var(--border);display:flex;align-items:center;gap:10px;">
+        <span class="sdot on" style="background:var(--green)"></span>
+        <div>
+          <div style="font-size:12px;font-weight:600;color:var(--g7)">Strava conectado</div>
+          <div style="font-size:11px;color:var(--g5)">Los datos de la sesión aparecerán aquí tras sincronizar.</div>
+        </div>
+       </div>`
+    : `<div class="strava-mini">
+        <h3>Conecta Strava</h3>
+        <p>Vincula tu cuenta para que cada sesión de Runna aparezca aquí automáticamente.</p>
+        <button class="btn-strava" onclick="STRAVA.connect()">🔗 Conectar Strava</button>
+        <div class="strava-status"><span class="sdot"></span> Sin conectar</div>
+       </div>`;
+
+  document.getElementById('t-detail').innerHTML=
+    `<div class="dh run-h">
+      <div><div class="dh-eye">Día ${dayObj.num} · Running</div><div class="dh-title">Entrenamiento Runna</div></div>
+      <div class="dh-icon">🏃‍♀️</div>
+    </div>
+    <div class="dbody">
+      ${timeNote}${phNote}
+      <div class="runna-card">
+        <div>
+          <h3>Abre la app de Runna</h3>
+          <p>La sesión de hoy está en tu plan de 10K. Runna te indica exactamente qué correr — distancia, tipo de entrenamiento y ritmos objetivo.</p>
+        </div>
+        <div class="runna-icon">📱</div>
+      </div>
+      ${stravaWidget}
+    </div>`;
+}
+
+// ── REST DETAIL ──
+function buildRestDetail(dayObj){
+  document.getElementById('t-detail').innerHTML=
+    `<div class="dh rest-h">
+      <div><div class="dh-eye">Día ${dayObj.num} · Descanso</div><div class="dh-title">El cuerpo construye hoy.</div></div>
+      <div class="dh-icon">${dayObj.icon}</div>
+    </div>
+    <div class="dbody">
+      <div class="rest-body">
+        <div class="rest-em">${dayObj.icon}</div>
+        <h3>Descanso es entrenamiento.</h3>
+        <p>El músculo crece y el corazón se adapta durante la recuperación. Camina, estírate, hidrátate. Nada más.</p>
+      </div>
+    </div>`;
+}
+
+
+// ═══════════════════════════════════════════════════════════════════
+// NUTRITION UI
+// ═══════════════════════════════════════════════════════════════════
+let activeNutIdx=0;
+
+function getNutWeek(){ return getWeek(getPhase(cycleDay)); }
+
+function renderNutSidebar(){
+  const week=getNutWeek();
+  document.getElementById('nut-days').innerHTML=week.map((d,i)=>{
+    const np=NUT_PLANS[getNutKey(d)];
+    return `<button class="ndb ${i===activeNutIdx?'act':''}" onclick="selNutDay(${i})">
+      <div class="ndb-ico">${d.icon}</div>
+      <div class="ndb-info">
+        <div class="ndb-nm">Día ${d.num}</div>
+        <div class="ndb-tp">${d.label.replace('\n',' · ')}</div>
+      </div>
+      <div class="ndb-kc">${np.kcal} kcal</div>
+    </button>`;
+  }).join('');
+}
+
+function selNutDay(i){ activeNutIdx=i; renderNutSidebar(); renderNutContent(); }
+
+function renderRefTable(){
+  const el=document.getElementById('nut-ref');
+  if(!el) return;
+  const groups=REF_GROUPS.map(g=>{
+    const rows=g.keys.map(k=>{
+      const b=MACRO_BLOCKS[k];
+      return `<div class="ref-item">
+        <div class="ri-l"><div class="ri-name">${b.label}</div><div class="ri-ex">${b.ex}</div></div>
+        <div class="ri-r"><div class="ri-qty">${b.qty}</div><div class="ri-mac">${b.macro}</div></div>
+      </div>`;
+    }).join('');
+    return `<div class="ref-group ${g.cls}"><h4>${g.title}</h4>${rows}</div>`;
+  }).join('');
+  el.innerHTML=`<div class="ref-wrap">
+    <div class="sec-lbl">Tabla de cantidades estándar</div>
+    <p class="ref-intro">Estas son tus porciones fijas. En cada comida elige la fuente que prefieras de cada categoría — <strong>siempre con esta cantidad</strong>. Así puedes variar recetas sin recalcular.</p>
+    <div class="ref-groups">${groups}</div>
+  </div>`;
+}
+
+function renderNutContent(){
+  const week=getNutWeek();
+  const dayObj=week[activeNutIdx];
+  const d=NUT_PLANS[getNutKey(dayObj)];
+  const ph=getPhase(cycleDay);
+
+  const pB=Math.round((d.prot*4/d.kcal)*100);
+  const cB=Math.round((d.carb*4/d.kcal)*100);
+  const fB=Math.round((d.fat*9/d.kcal)*100);
+
+  const noteMain=d.note?`<div class="note-b"><div class="ni">📌</div><div>${d.note}</div></div>`:'';
+  const phaseNote=`<div class="note-b"><div class="ni">${ph.emoji}</div><div>Estás en fase <strong style="color:var(--w6)">${ph.name}</strong> (día ${cycleDay} del ciclo). ${ph.note}</div></div>`;
+
+  const dotCls=bk=>bk.startsWith('prot')||bk==='whey'||bk==='dairy_gk'?'prot'
+    :bk.startsWith('carb')||bk==='fruit'?'carb'
+    :bk.startsWith('fat')?'fat':'veg';
+
+  const meals=d.meals.map((m,i)=>{
+    const mn=m.note?`<div class="note-b"><div class="ni">💡</div><div>${m.note}</div></div>`:'';
+    const blockRows=m.blocks.map(bk=>{
+      const b=MACRO_BLOCKS[bk];
+      return `<div class="mb">
+        <div class="mb-dot ${dotCls(bk)}"></div>
+        <div class="mb-inf"><div class="mb-nm">${b.label}</div><div class="mb-ex">${b.ex}</div></div>
+        <div class="mb-r"><div class="mb-qty">${b.qty}</div><div class="mb-mac">${b.macro}</div></div>
+      </div>`;
+    }).join('');
+    return `<div class="meal-c open" id="nm${i}">
+      <div class="meal-hdr" onclick="togMeal(${i})">
+        <div class="mh-ico">${m.icon}</div>
+        <div class="mh-info">
+          <div class="mh-name">${m.name}</div>
+          <div class="mh-time">${m.time}</div>
+          <div class="mh-pills"><span class="mp p">${m.prot}g P</span><span class="mp c">${m.carb}g C</span><span class="mp f">${m.fat}g G</span></div>
+        </div>
+        <div class="mh-kcal">${m.kcal} kcal</div>
+        <div class="meal-tog">▾</div>
+      </div>
+      <div class="meal-body">${mn}${blockRows}</div>
+    </div>`;
+  }).join('');
+
+  document.getElementById('nut-content').innerHTML=
+    `<div class="mac-sum">
+      <div class="mac-top">
+        <h3>Día ${dayObj.num} — <em>${d.label}</em></h3>
+        <span class="type-badge ${d.badge}">${d.label}</span>
+      </div>
+      ${phaseNote}${noteMain}
+      <div class="mac-grid">
+        <div><div class="mg-lbl">Calorías</div><div class="mg-val">${d.kcal}<span> kcal</span></div><div class="mg-bar"><div class="mg-fill kcal" style="width:${Math.round(d.kcal/2000*100)}%"></div></div></div>
+        <div><div class="mg-lbl">Proteína</div><div class="mg-val">${d.prot}<span> g</span></div><div class="mg-bar"><div class="mg-fill prot" style="width:${pB}%"></div></div></div>
+        <div><div class="mg-lbl">Carbohidratos</div><div class="mg-val">${d.carb}<span> g</span></div><div class="mg-bar"><div class="mg-fill carb" style="width:${cB}%"></div></div></div>
+        <div><div class="mg-lbl">Grasas</div><div class="mg-val">${d.fat}<span> g</span></div><div class="mg-bar"><div class="mg-fill fat" style="width:${fB}%"></div></div></div>
+      </div>
+    </div>
+    <div class="meals">${meals}</div>`;
+}
+
+function togMeal(i){ document.getElementById('nm'+i).classList.toggle('open'); }
+
+
+// ═══════════════════════════════════════════════════════════════════
+// PAGE NAV
+// ═══════════════════════════════════════════════════════════════════
+function showPage(id, el){
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('nav a').forEach(a=>a.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  el.classList.add('active');
+  if(id==='nutrition'){ renderRefTable(); renderNutSidebar(); renderNutContent(); }
+  if(id==='running')  { renderRunPage(); }
+}
+
+// ── INIT ──
+buildSegTrack();
+setCycleDay(7);
+</script>
+</body>
+</html>
