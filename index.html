@@ -182,52 +182,66 @@ main{max-width:1360px;margin:0 auto;padding:0 56px 80px}
   color:var(--g7);margin-bottom:8px;font-style:italic}
 .rest-body p{font-size:13px;color:var(--g5);max-width:300px;margin:0 auto;line-height:1.85}
 
-/* ── STRAVA ── */
-.strava-connect-hero{
-  background:linear-gradient(135deg,var(--w9) 0%,var(--w7) 100%);
+/* ── APPLE HEALTH IMPORT ── */
+.health-hero{background:linear-gradient(135deg,var(--w9) 0%,var(--w7) 100%);
   border-radius:20px;padding:40px 52px;margin-bottom:28px;
-  display:flex;align-items:center;gap:44px;position:relative;overflow:hidden;
-}
-.strava-connect-hero::before{content:'';position:absolute;right:-40px;top:-40px;
-  width:240px;height:240px;border-radius:50%;background:rgba(252,76,2,.12)}
-.strava-connect-hero::after{content:'';position:absolute;right:140px;bottom:-60px;
-  width:160px;height:160px;border-radius:50%;background:rgba(196,96,126,.1)}
-.sch-text{position:relative;z-index:1;flex:1}
-.sch-text h2{font-family:'Cormorant Garamond',serif;font-size:38px;font-weight:300;
+  display:flex;align-items:center;gap:44px;position:relative;overflow:hidden}
+.health-hero::before{content:'';position:absolute;right:-40px;top:-40px;
+  width:240px;height:240px;border-radius:50%;background:rgba(196,96,126,.15)}
+.hh-text{position:relative;z-index:1;flex:1}
+.hh-text h2{font-family:'Cormorant Garamond',serif;font-size:38px;font-weight:300;
   color:var(--white);line-height:1.05;margin-bottom:10px;text-transform:uppercase;letter-spacing:-0.5px}
-.sch-text h2 em{text-transform:none;font-style:italic;color:var(--blush);letter-spacing:0}
-.sch-text p{font-size:13px;color:rgba(255,255,255,.45);max-width:400px;line-height:1.8;margin-bottom:22px}
-.btn-strava{display:inline-flex;align-items:center;gap:8px;background:#FC4C02;color:white;
-  border:none;padding:12px 26px;border-radius:26px;font-family:'DM Sans',sans-serif;
+.hh-text h2 em{text-transform:none;font-style:italic;color:var(--blush);letter-spacing:0}
+.hh-text p{font-size:13px;color:rgba(255,255,255,.45);max-width:400px;line-height:1.8;margin-bottom:16px}
+.hh-steps{display:flex;gap:18px;margin-bottom:20px;flex-wrap:wrap}
+.hh-step{display:flex;align-items:center;gap:7px;font-size:11px;color:rgba(255,255,255,.5)}
+.hh-num{width:20px;height:20px;border-radius:50%;background:rgba(255,255,255,.12);
+  border:1px solid rgba(255,255,255,.2);display:flex;align-items:center;justify-content:center;
+  font-size:9px;color:var(--blush);font-weight:700;flex-shrink:0}
+.btn-import{display:inline-flex;align-items:center;gap:8px;background:var(--w6);color:white;
+  border:1px solid var(--w4);padding:12px 26px;border-radius:26px;font-family:'DM Sans',sans-serif;
   font-size:12px;font-weight:600;cursor:pointer;transition:all .15s;letter-spacing:.5px}
-.btn-strava:hover{transform:translateY(-2px);box-shadow:0 8px 20px rgba(252,76,2,.4)}
-.btn-strava:disabled{background:#555;cursor:default;transform:none;box-shadow:none}
-.strava-status{display:inline-flex;align-items:center;gap:7px;font-size:11px;
-  color:rgba(255,255,255,.35);margin-top:10px}
-.sdot{width:7px;height:7px;border-radius:50%;background:rgba(255,255,255,.2)}
-.sdot.on{background:var(--green);box-shadow:0 0 8px rgba(34,197,94,.5)}
-.sch-img{font-size:80px;flex-shrink:0;position:relative;z-index:1;opacity:.85}
-
-/* In-detail strava */
-.strava-mini{background:var(--cream);border:1px dashed var(--border2);border-radius:12px;
+.btn-import:hover{background:var(--w5);transform:translateY(-2px);box-shadow:0 8px 20px rgba(92,18,35,.4)}
+#health-file-input{display:none}
+.hh-img{font-size:80px;flex-shrink:0;position:relative;z-index:1;opacity:.85}
+.hh-note{font-size:10px;color:rgba(255,255,255,.25);margin-top:10px;letter-spacing:.3px}
+/* health dashboard in hero */
+.health-loaded h2{font-size:28px;margin-bottom:6px}
+.health-loaded p.sub{font-size:12px;color:rgba(255,255,255,.4);margin-bottom:20px}
+.hd-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:16px}
+.hd-cell{background:rgba(255,255,255,.07);border-radius:12px;padding:14px 16px;border:1px solid rgba(255,255,255,.1)}
+.hd-cell .hdc-lbl{font-size:9px;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,.35);font-weight:600;margin-bottom:6px}
+.hd-cell .hdc-v{font-family:'Cormorant Garamond',serif;font-size:26px;font-weight:300;color:var(--white);line-height:1;margin-bottom:2px}
+.hd-cell .hdc-v span{font-size:11px;font-family:'DM Sans',sans-serif;color:rgba(255,255,255,.4)}
+.hd-cell .hdc-delta{font-size:10px;font-weight:600;margin-top:3px}
+.hdc-delta.up{color:#6EE78A}.hdc-delta.down{color:#F4A0A0}.hdc-delta.neu{color:rgba(255,255,255,.3)}
+.hd-last-run{background:rgba(255,255,255,.07);border-radius:12px;padding:14px 18px;border:1px solid rgba(255,255,255,.1);margin-bottom:14px}
+.hd-lr-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px}
+.hd-lr-lbl{font-size:9px;letter-spacing:2px;text-transform:uppercase;color:var(--blush);font-weight:600}
+.hd-lr-date{font-size:10px;color:rgba(255,255,255,.3)}
+.hd-lr-stats{display:flex;gap:20px;flex-wrap:wrap}
+.hdlrs{display:flex;flex-direction:column;gap:2px}
+.hdlrs-v{font-family:'Cormorant Garamond',serif;font-size:20px;font-weight:300;color:var(--white);line-height:1}
+.hdlrs-v span{font-size:10px;font-family:'DM Sans',sans-serif;color:rgba(255,255,255,.4)}
+.hdlrs-l{font-size:9px;color:rgba(255,255,255,.3);letter-spacing:.5px;text-transform:uppercase}
+.hd-bars-wrap{margin-bottom:12px}
+.hd-bars-lbl{font-size:9px;letter-spacing:1.5px;text-transform:uppercase;color:rgba(255,255,255,.3);font-weight:600;margin-bottom:8px}
+.hd-bars{display:flex;align-items:flex-end;gap:5px;height:48px}
+.hd-bar-w{flex:1;display:flex;flex-direction:column;align-items:center;gap:3px;height:100%;justify-content:flex-end}
+.hd-bar{width:100%;background:rgba(255,255,255,.12);border-radius:2px 2px 0 0;min-height:2px;transition:height .5s}
+.hd-bar.cur{background:var(--w4)}
+.hd-bar-l{font-size:8px;color:rgba(255,255,255,.25);white-space:nowrap}
+.health-reset-btn{font-size:10px;color:rgba(255,255,255,.25);background:none;border:none;cursor:pointer;font-family:'DM Sans',sans-serif;letter-spacing:.5px;padding:4px 8px}
+.health-reset-btn:hover{color:rgba(255,255,255,.5)}
+/* in-detail mini */
+.health-mini{background:var(--cream);border:1px dashed var(--border2);border-radius:12px;
   padding:22px 26px;text-align:center;margin-top:4px}
-.strava-mini h3{font-family:'Cormorant Garamond',serif;font-size:18px;font-weight:300;
-  color:var(--g7);margin-bottom:6px}
-.strava-mini p{font-size:11.5px;color:var(--g5);line-height:1.7;margin-bottom:16px;max-width:280px;margin-left:auto;margin-right:auto}
-.strava-mini .strava-status{color:var(--g5);margin-top:8px;justify-content:center}
-.strava-mini .sdot{background:var(--g3)}
-
-/* STRAVA ACTIVITIES */
-.acts-section{margin-bottom:28px}
-.act-row{display:flex;align-items:center;gap:12px;padding:10px 14px;
-  background:var(--cream);border-radius:10px;border:1px solid var(--border);
-  font-size:12px;margin-bottom:5px}
-.act-date{color:var(--g5);width:76px;flex-shrink:0;font-size:11px}
-.act-name{color:var(--g7);font-weight:500;flex:1}
-.act-dist{color:var(--w7);font-weight:700;width:58px;text-align:right}
-.act-pace{color:var(--g5);width:68px;text-align:right;font-size:11px}
-.act-badge{background:rgba(252,76,2,.1);color:#FC4C02;font-size:9.5px;font-weight:700;
-  padding:2px 9px;border-radius:99px;flex-shrink:0;letter-spacing:.5px}
+.health-mini h3{font-family:'Cormorant Garamond',serif;font-size:17px;font-weight:300;color:var(--g7);margin-bottom:5px}
+.health-mini p{font-size:11.5px;color:var(--g5);line-height:1.7;margin-bottom:14px;max-width:260px;margin-left:auto;margin-right:auto}
+.health-mini .btn-import-sm{display:inline-flex;align-items:center;gap:7px;background:var(--w7);color:white;
+  border:none;padding:9px 20px;border-radius:22px;font-family:'DM Sans',sans-serif;font-size:11px;font-weight:600;cursor:pointer;letter-spacing:.5px}
+.health-mini .btn-import-sm:hover{background:var(--w6)}
+#health-file-input-mini{display:none}
 
 /* ── RUNNING PAGE CHARTS ── */
 .chart-card{background:var(--white);border:1px solid var(--border);border-radius:var(--radius);padding:22px}
@@ -335,7 +349,7 @@ main{max-width:1360px;margin:0 auto;padding:0 56px 80px}
   main{padding:0 16px 60px}
   .day-grid{grid-template-columns:repeat(2,1fr)}
   .stats-row{grid-template-columns:repeat(2,1fr)}
-  .strava-connect-hero{flex-direction:column}.sch-img{display:none}
+  .health-hero{flex-direction:column}.hh-img{display:none}
 }
 
 /* ── REFERENCE TABLE ── */
@@ -431,21 +445,23 @@ main{max-width:1360px;margin:0 auto;padding:0 56px 80px}
     <div class="stat-card"><div class="stat-val">6:58</div><div class="stat-lbl">mejor ritmo /km</div></div>
   </div>
 
-  <!-- Strava connect -->
-  <div class="strava-connect-hero">
-    <div class="sch-text">
-      <h2>Conecta <em>Strava</em><br>con Runna</h2>
-      <p>Cada entrenamiento que completes en Runna se sincroniza automáticamente a Strava. Vincula tu cuenta y aquí verás tus sesiones en tiempo real.</p>
-      <button class="btn-strava" id="btn-strava-main" onclick="STRAVA.connect()">🔗 Conectar Strava</button>
-      <div class="strava-status"><span class="sdot" id="s-dot"></span><span id="s-status-txt">Sin conectar</span></div>
+  <!-- Apple Health import -->
+  <div class="health-hero" id="health-hero">
+    <div class="hh-text" id="hh-content">
+      <h2>Importa <em>Apple Health</em></h2>
+      <p>Sube tu exportación de Apple Health y verás aquí tus estadísticas semanales, el último entreno y tu progreso de las últimas semanas.</p>
+      <div class="hh-steps">
+        <div class="hh-step"><div class="hh-num">1</div> Abre Health en iPhone</div>
+        <div class="hh-step"><div class="hh-num">2</div> Perfil → Exportar datos</div>
+        <div class="hh-step"><div class="hh-num">3</div> Selecciona el ZIP aquí</div>
+      </div>
+      <button class="btn-import" onclick="document.getElementById('health-file-input').click()">
+        📂 Importar datos
+      </button>
+      <input type="file" id="health-file-input" accept=".zip" onchange="handleHealthFile(this)">
+      <div class="hh-note">Todo se procesa en tu dispositivo — ningún dato se sube a servidores</div>
     </div>
-    <div class="sch-img">🏃‍♀️</div>
-  </div>
-
-  <!-- Live activities (hidden until connected) -->
-  <div class="acts-section card" id="strava-acts-section" style="display:none;margin-bottom:28px">
-    <div class="sec-lbl">Últimas sesiones Runna · Strava</div>
-    <div id="strava-acts-list"></div>
+    <div class="hh-img">🏃‍♀️</div>
   </div>
 
   <!-- Charts -->
@@ -504,136 +520,203 @@ main{max-width:1360px;margin:0 auto;padding:0 56px 80px}
 
 <script>
 // ═══════════════════════════════════════════════════════════════════
-// ⚙️  STRAVA INTEGRATION
-// ───────────────────────────────────────────────────────────────────
-// CÓMO ACTIVAR:
-//   1. Ve a https://www.strava.com/settings/api y crea una app
-//   2. En "Authorization Callback Domain" pon el dominio donde abres este archivo
-//      (p.ej. "localhost" si lo abres localmente con un servidor)
-//   3. Rellena CLIENT_ID y CLIENT_SECRET aquí abajo y guarda el archivo
+// 📊  APPLE HEALTH READER
 // ═══════════════════════════════════════════════════════════════════
-const STRAVA = {
-  CLIENT_ID:     'TU_CLIENT_ID',       // ← Reemplaza con tu Client ID
-  CLIENT_SECRET: 'TU_CLIENT_SECRET',   // ← Reemplaza con tu Client Secret
+let healthWorkouts = null;
+try { const s = localStorage.getItem('camilaWorkouts'); if(s) healthWorkouts = JSON.parse(s); } catch(e){}
 
-  REDIRECT_URI: window.location.href.split('?')[0].split('#')[0],
-  SCOPE: 'activity:read_all',
+function handleHealthFile(input){
+  const file = (input.files||[])[0];
+  if(!file) return;
+  processHealthZip(file);
+}
 
-  token: null, athlete: null, activities: [], connected: false,
+async function processHealthZip(file){
+  // Show loading in hero
+  document.getElementById('hh-content').innerHTML =
+    '<div style="color:rgba(255,255,255,.6);font-size:13px;text-align:center;padding:20px 0;">' +
+    '<div style="width:28px;height:28px;border:3px solid rgba(255,255,255,.15);border-top-color:var(--blush);border-radius:50%;animation:spin .8s linear infinite;margin:0 auto 12px"></div>' +
+    'Procesando datos de salud...</div>';
 
-  connect() {
-    if (this.CLIENT_ID === 'TU_CLIENT_ID') {
-      alert('⚙️ Para activar Strava:\n\n1. Ve a https://www.strava.com/settings/api\n2. Crea una app\n3. Rellena CLIENT_ID y CLIENT_SECRET en el código de esta página\n4. Guarda y recarga el archivo');
-      return;
-    }
-    const url = `https://www.strava.com/oauth/authorize`
-      + `?client_id=${this.CLIENT_ID}`
-      + `&response_type=code`
-      + `&redirect_uri=${encodeURIComponent(this.REDIRECT_URI)}`
-      + `&approval_prompt=force`
-      + `&scope=${this.SCOPE}`;
-    window.location.href = url;
-  },
-
-  async exchangeCode(code) {
-    _stravaUI('loading', 'Conectando con Strava...');
-    try {
-      const res = await fetch('https://www.strava.com/oauth/token', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          client_id: this.CLIENT_ID,
-          client_secret: this.CLIENT_SECRET,
-          code,
-          grant_type: 'authorization_code'
-        })
+  try {
+    if(typeof JSZip === 'undefined'){
+      await new Promise((res,rej)=>{
+        const s=document.createElement('script');
+        s.src='https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js';
+        s.onload=res; s.onerror=rej; document.head.appendChild(s);
       });
-      const data = await res.json();
-      if (data.access_token) {
-        this.token = data.access_token;
-        this.athlete = data.athlete;
-        this.connected = true;
-        await this.fetchActivities();
-        const name = this.athlete ? this.athlete.firstname : '';
-        _stravaUI('ok', name ? `Conectada como ${name} ✓` : 'Strava conectado ✓');
-        renderStravaActivities();
-      } else {
-        _stravaUI('error', data.message || 'Error de autenticación');
-      }
-    } catch(e) {
-      _stravaUI('error', 'Error: ' + e.message);
     }
-  },
-
-  async fetchActivities(perPage = 30) {
-    if (!this.token) return;
-    try {
-      const res = await fetch(
-        `https://www.strava.com/api/v3/athlete/activities?per_page=${perPage}`,
-        { headers: { Authorization: `Bearer ${this.token}` } }
-      );
-      const all = await res.json();
-      if (Array.isArray(all))
-        this.activities = all.filter(a => a.sport_type === 'Run' || a.type === 'Run');
-    } catch(e) { console.error('Strava fetch error:', e); }
-    return this.activities;
-  }
-};
-
-function _stravaUI(state, msg) {
-  const dot = document.getElementById('s-dot');
-  const txt = document.getElementById('s-status-txt');
-  const btn = document.getElementById('btn-strava-main');
-  if (state === 'ok') {
-    dot.classList.add('on');
-    txt.textContent = msg;
-    btn.textContent = '✓ ' + msg;
-    btn.disabled = true;
-    // update total stats to include Strava
-    const stravaKm = STRAVA.activities.reduce((a,r) => a + r.distance/1000, 0);
-    const totalKm = CAMILA_RUNS.reduce((a,r) => a + r.distance_km, 0) + stravaKm;
-    document.getElementById('s-km').textContent = totalKm.toFixed(1);
-    document.getElementById('s-runs').textContent = CAMILA_RUNS.length + STRAVA.activities.length;
-  } else if (state === 'loading') {
-    txt.textContent = msg;
-    btn.disabled = true;
-  } else {
-    txt.textContent = '⚠️ ' + msg;
-    btn.disabled = false;
+    const zip = await JSZip.loadAsync(file);
+    let xmlFile = null;
+    zip.forEach((path, f) => { if(path.endsWith('export.xml')) xmlFile = f; });
+    if(!xmlFile) throw new Error('No se encontró export.xml en el ZIP');
+    const xml = await xmlFile.async('text');
+    const workouts = parseAppleHealthRuns(xml);
+    if(!workouts.length) throw new Error('No se encontraron carreras en los datos');
+    healthWorkouts = workouts;
+    try { localStorage.setItem('camilaWorkouts', JSON.stringify(workouts)); } catch(e){}
+    renderHealthHero(workouts);
+    // Also update mini widget if open
+    const mini = document.getElementById('health-mini-zone');
+    if(mini) renderHealthMini(mini);
+  } catch(err){
+    document.getElementById('hh-content').innerHTML =
+      '<h2 style="color:var(--blush)">Error al procesar</h2>' +
+      '<p style="color:rgba(255,255,255,.4);margin-bottom:16px">' + err.message + '</p>' +
+      '<button class="btn-import" onclick="document.getElementById('health-file-input-2').click()">📂 Intentar de nuevo</button>' +
+      '<input type="file" id="health-file-input-2" accept=".zip" onchange="handleHealthFile(this)">';
   }
 }
 
-function renderStravaActivities() {
-  if (!STRAVA.activities.length) return;
-  const sec = document.getElementById('strava-acts-section');
-  sec.style.display = '';
-  const list = document.getElementById('strava-acts-list');
-  list.innerHTML = STRAVA.activities.slice(0,12).map(a => {
-    const dist  = (a.distance/1000).toFixed(2);
-    const pace  = a.average_speed > 0 ? 1000/a.average_speed/60 : 0;
-    const pm    = Math.floor(pace);
-    const ps    = Math.round((pace-pm)*60).toString().padStart(2,'0');
-    const date  = new Date(a.start_date_local).toLocaleDateString('es-ES',{day:'2-digit',month:'short'});
-    return `<div class="act-row">
-      <span class="act-date">${date}</span>
-      <span class="act-name">${a.name}</span>
-      <span class="act-dist">${dist} km</span>
-      <span class="act-pace">${pm}:${ps}/km</span>
-      <span class="act-badge">STRAVA</span>
+function parseAppleHealthRuns(xml){
+  const runs = [];
+  const re = /<Workout\s([^>]*workoutActivityType="HKWorkoutActivityTypeRunning"[^>]*)>/gi;
+  let m;
+  while((m = re.exec(xml)) !== null){
+    const a = m[1];
+    const g = k => { const r=new RegExp(k+'="([^"]*)"'); const f=r.exec(a); return f?f[1]:null; };
+    const dist = parseFloat(g('totalDistance')||'0');
+    const dur  = parseFloat(g('duration')||'0');
+    const cal  = parseFloat(g('totalEnergyBurned')||'0');
+    const date = (g('startDate')||'').slice(0,10);
+    if(dist < 0.3 || dur < 3 || !date) continue;
+    // Look for HR in workout body
+    const wEnd = xml.indexOf('</Workout>', m.index);
+    const body = wEnd>0 ? xml.slice(m.index, wEnd) : '';
+    const hrM = /HeartRate"[^>]*average="([^"]*)"/.exec(body);
+    const hr = hrM ? parseFloat(hrM[1]) : null;
+    runs.push({ date, dist: Math.round(dist*100)/100, dur: Math.round(dur), cal: Math.round(cal), hr });
+  }
+  runs.sort((a,b) => a.date.localeCompare(b.date));
+  return runs;
+}
+
+function weekRuns(workouts, offset){
+  const now = new Date();
+  const dow = now.getDay()||7;
+  const mon = new Date(now); mon.setDate(now.getDate()-dow+1-offset*7); mon.setHours(0,0,0,0);
+  const sun = new Date(mon); sun.setDate(mon.getDate()+6); sun.setHours(23,59,59,999);
+  return workouts.filter(w=>{ const d=new Date(w.date); return d>=mon&&d<=sun; });
+}
+function wkLabel(offset){
+  if(offset===0) return 'Ahora';
+  if(offset===1) return 'S-1';
+  const now=new Date(); const dow=now.getDay()||7;
+  const mon=new Date(now); mon.setDate(now.getDate()-dow+1-offset*7);
+  return mon.toLocaleDateString('es-ES',{day:'numeric',month:'short'});
+}
+function fmtPace(km,min){ if(!km||km<.1) return '—'; const p=min/km; const pm=Math.floor(p); const ps=Math.round((p-pm)*60); return `${pm}:${String(ps).padStart(2,'0')}`; }
+function fmtDur(min){ const h=Math.floor(min/60); const m=min%60; return h>0?`${h}h ${m}min`:`${m}min`; }
+function fmtDate(s){ if(!s) return '—'; return new Date(s).toLocaleDateString('es-ES',{weekday:'short',day:'numeric',month:'short'}); }
+function delta(cur,prev,unit,dec=1){
+  if(!prev) return `<div class="hdc-delta neu">— sin datos anteriores</div>`;
+  const d=cur-prev; const cls=d>0?'up':d<0?'down':'neu'; const sign=d>0?'+':'';
+  return `<div class="hdc-delta ${cls}">${sign}${d.toFixed(dec)} ${unit}</div>`;
+}
+
+function renderHealthHero(workouts){
+  const tw=weekRuns(workouts,0), lw=weekRuns(workouts,1);
+  const sumKm=arr=>arr.reduce((s,w)=>s+w.dist,0);
+  const sumMin=arr=>arr.reduce((s,w)=>s+w.dur,0);
+  const twKm=sumKm(tw), lwKm=sumKm(lw);
+  const twMin=sumMin(tw), lwMin=sumMin(lw);
+  const last=workouts[workouts.length-1];
+
+  // 6-week bar chart
+  const weeks=[]; for(let i=5;i>=0;i--) weeks.push({label:wkLabel(i),km:sumKm(weekRuns(workouts,i)),cur:i===0});
+  const maxKm=Math.max(...weeks.map(w=>w.km),1);
+  const bars=weeks.map(w=>`
+    <div class="hd-bar-w">
+      <div class="hd-bar ${w.cur?'cur':''}" style="height:${Math.round(w.km/maxKm*100)}%"></div>
+      <div class="hd-bar-l">${w.label}</div>
+    </div>`).join('');
+
+  const updatedAt=new Date().toLocaleDateString('es-ES',{day:'numeric',month:'short',hour:'2-digit',minute:'2-digit'});
+
+  document.getElementById('hh-content').innerHTML = `
+    <div class="health-loaded">
+      <h2>Tus <em>entrenamientos</em></h2>
+      <p class="sub">Actualizado: ${updatedAt}</p>
+    </div>
+    ${last?`<div class="hd-last-run">
+      <div class="hd-lr-top"><div class="hd-lr-lbl">🏃‍♀️ Último entreno</div><div class="hd-lr-date">${fmtDate(last.date)}</div></div>
+      <div class="hd-lr-stats">
+        <div class="hdlrs"><div class="hdlrs-v">${last.dist.toFixed(1)}<span> km</span></div><div class="hdlrs-l">Distancia</div></div>
+        <div class="hdlrs"><div class="hdlrs-v">${fmtDur(last.dur)}</div><div class="hdlrs-l">Duración</div></div>
+        <div class="hdlrs"><div class="hdlrs-v">${fmtPace(last.dist,last.dur)}<span> /km</span></div><div class="hdlrs-l">Ritmo</div></div>
+        ${last.hr?`<div class="hdlrs"><div class="hdlrs-v">${Math.round(last.hr)}<span> ppm</span></div><div class="hdlrs-l">FC media</div></div>`:''}
+      </div>
+    </div>`:''}
+    <div class="hd-grid">
+      <div class="hd-cell">
+        <div class="hdc-lbl">Km esta semana</div>
+        <div class="hdc-v">${twKm.toFixed(1)}<span> km</span></div>
+        ${delta(twKm,lwKm,'km')}
+      </div>
+      <div class="hd-cell">
+        <div class="hdc-lbl">Tiempo corriendo</div>
+        <div class="hdc-v">${Math.floor(twMin/60)}<span>h </span>${twMin%60}<span>min</span></div>
+        ${delta(twMin,lwMin,'min',0)}
+      </div>
+      <div class="hd-cell">
+        <div class="hdc-lbl">Sesiones</div>
+        <div class="hdc-v">${tw.length}<span> runs</span></div>
+        ${delta(tw.length,lw.length,'',0)}
+      </div>
+    </div>
+    <div class="hd-bars-wrap">
+      <div class="hd-bars-lbl">Últimas 6 semanas</div>
+      <div class="hd-bars">${bars}</div>
+    </div>
+    <button class="health-reset-btn" onclick="resetHealth()">↺ Actualizar datos</button>`;
+}
+
+function resetHealth(){
+  healthWorkouts=null;
+  try{localStorage.removeItem('camilaWorkouts');}catch(e){}
+  document.getElementById('hh-content').innerHTML=`
+    <h2>Importa <em>Apple Health</em></h2>
+    <p>Sube tu exportación de Apple Health y verás aquí tus estadísticas semanales, el último entreno y tu progreso.</p>
+    <div class="hh-steps">
+      <div class="hh-step"><div class="hh-num">1</div> Abre Health en iPhone</div>
+      <div class="hh-step"><div class="hh-num">2</div> Perfil → Exportar datos</div>
+      <div class="hh-step"><div class="hh-num">3</div> Selecciona el ZIP aquí</div>
+    </div>
+    <button class="btn-import" onclick="document.getElementById('health-file-input-r').click()">📂 Importar datos</button>
+    <input type="file" id="health-file-input-r" accept=".zip" onchange="handleHealthFile(this)">
+    <div class="hh-note">Todo se procesa en tu dispositivo</div>`;
+}
+
+function renderHealthMini(el){
+  if(healthWorkouts && healthWorkouts.length){
+    const last=healthWorkouts[healthWorkouts.length-1];
+    el.innerHTML=`<div style="background:var(--cream);border-radius:12px;padding:14px 18px;border:1px solid var(--border);">
+      <div style="font-size:9px;letter-spacing:2px;text-transform:uppercase;color:var(--w6);font-weight:600;margin-bottom:8px">🏃‍♀️ Último entreno registrado</div>
+      <div style="display:flex;gap:18px;flex-wrap:wrap;">
+        <div><div style="font-family:'Cormorant Garamond',serif;font-size:20px;color:var(--g7)">${last.dist.toFixed(1)}<span style="font-size:11px;font-family:'DM Sans',sans-serif;color:var(--g5)"> km</span></div><div style="font-size:9px;color:var(--g4);text-transform:uppercase;letter-spacing:.5px">Distancia</div></div>
+        <div><div style="font-family:'Cormorant Garamond',serif;font-size:20px;color:var(--g7)">${fmtDur(last.dur)}</div><div style="font-size:9px;color:var(--g4);text-transform:uppercase;letter-spacing:.5px">Duración</div></div>
+        <div><div style="font-family:'Cormorant Garamond',serif;font-size:20px;color:var(--g7)">${fmtPace(last.dist,last.dur)}<span style="font-size:11px;font-family:'DM Sans',sans-serif;color:var(--g5)"> /km</span></div><div style="font-size:9px;color:var(--g4);text-transform:uppercase;letter-spacing:.5px">Ritmo</div></div>
+        ${last.hr?`<div><div style="font-family:'Cormorant Garamond',serif;font-size:20px;color:var(--g7)">${Math.round(last.hr)}<span style="font-size:11px;font-family:'DM Sans',sans-serif;color:var(--g5)"> ppm</span></div><div style="font-size:9px;color:var(--g4);text-transform:uppercase;letter-spacing:.5px">FC media</div></div>`:''}
+      </div>
+      <div style="font-size:10px;color:var(--g4);margin-top:8px">${fmtDate(last.date)}</div>
     </div>`;
-  }).join('');
+  } else {
+    el.innerHTML=`<div class="health-mini">
+      <h3>Ver mis entrenamientos</h3>
+      <p>Importa Apple Health para ver tu último run aquí.</p>
+      <button class="btn-import-sm" onclick="document.getElementById('health-file-input-mini').click()">📂 Importar</button>
+      <input type="file" id="health-file-input-mini" accept=".zip" onchange="handleHealthFile(this)">
+    </div>`;
+  }
 }
 
-// Check for OAuth callback on page load
-(function initStrava() {
-  const p   = new URLSearchParams(window.location.search);
-  const err = p.get('error');
-  const code= p.get('code');
-  if (err || !code) return;
-  window.history.replaceState({}, '', window.location.pathname);
-  STRAVA.exchangeCode(code);
-})();
+// Auto-render if data already in localStorage
+if(healthWorkouts && healthWorkouts.length) {
+  document.addEventListener('DOMContentLoaded', () => renderHealthHero(healthWorkouts));
+}
 
+// Pre-load JSZip
+(function(){ const s=document.createElement('script'); s.src='https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js'; document.head.appendChild(s); })();
 
 // ═══════════════════════════════════════════════════════════════════
 // CAMILA — HISTORIAL APPLE HEALTH (43 carreras limpias)
@@ -1165,20 +1248,7 @@ function buildRunDetail(dayObj,ph){
   const phNote = (ph.name==='Lútea'||ph.name==='Menstrual')
     ? `<div class="phase-note"><span class="pni">${ph.emoji}</span> Fase ${ph.name}: la FC puede ir algo más alta de lo habitual. Es normal — no compares con tus mejores días.</div>`
     : '';
-  const stravaWidget = STRAVA.connected
-    ? `<div style="background:var(--cream);border-radius:12px;padding:16px 20px;border:1px solid var(--border);display:flex;align-items:center;gap:10px;">
-        <span class="sdot on" style="background:var(--green)"></span>
-        <div>
-          <div style="font-size:12px;font-weight:600;color:var(--g7)">Strava conectado</div>
-          <div style="font-size:11px;color:var(--g5)">Los datos de la sesión aparecerán aquí tras sincronizar.</div>
-        </div>
-       </div>`
-    : `<div class="strava-mini">
-        <h3>Conecta Strava</h3>
-        <p>Vincula tu cuenta para que cada sesión de Runna aparezca aquí automáticamente.</p>
-        <button class="btn-strava" onclick="STRAVA.connect()">🔗 Conectar Strava</button>
-        <div class="strava-status"><span class="sdot"></span> Sin conectar</div>
-       </div>`;
+  const healthWidget = `<div id="health-mini-zone"></div>`;
 
   document.getElementById('t-detail').innerHTML=
     `<div class="dh run-h">
@@ -1194,7 +1264,7 @@ function buildRunDetail(dayObj,ph){
         </div>
         <div class="runna-icon">📱</div>
       </div>
-      ${stravaWidget}
+      ${healthWidget}
     </div>`;
 }
 
